@@ -150,14 +150,14 @@ button.chip:hover{border-color:var(--line2)}
 }
 
 /* marquee */
-.marquee{position:relative;background:linear-gradient(180deg,#0c0a24 0%,var(--band) 50%,#0c0a24 100%);padding-block:34px;overflow:hidden;border-bottom:1px solid var(--line)}
+.marquee{--mq-fs:clamp(72px,12vw,176px);position:relative;background:linear-gradient(180deg,#0c0a24 0%,var(--band) 50%,#0c0a24 100%);padding:calc(34px + var(--mq-fs) * 0.0110) 0 calc(34px - var(--mq-fs) * 0.0110);overflow:hidden;border-bottom:1px solid var(--line)}
 .marquee .mq-glow{position:absolute;inset:34px 0;overflow:hidden}
+.marquee .mq-glow .track{margin-top:calc(var(--mq-fs) * 0.0110)}
 .marquee .track{display:flex;width:max-content;animation:marq 34s linear infinite}
 .marquee .front{position:relative}
 @keyframes marq{to{transform:translateX(-50%)}}
 .gtxt{font-family:var(--f-marq);font-weight:400;font-size:clamp(72px,12vw,176px);line-height:1.04;text-transform:uppercase;white-space:nowrap;padding:0 .14em;background-image:url(img/strip.png);background-size:auto 100%;background-repeat:repeat-x;-webkit-background-clip:text;background-clip:text;color:transparent;image-rendering:pixelated}
 .glow{filter:blur(26px) saturate(1.7);opacity:.9}
-.marquee-cap{position:relative;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:18px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 
 /* loom */
 .loom-sec{background:var(--bg2)}
@@ -689,7 +689,6 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
   <section class="marquee" aria-label="Lu Ambriz, en cada nodo">
     <div class="mq-glow" aria-hidden="true"><div class="track"><span class="gtxt glow">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span><span class="gtxt glow">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span></div></div>
     <div class="front"><div class="track"><span class="gtxt">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span><span class="gtxt" aria-hidden="true">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span></div></div>
-    <div class="wrap marquee-cap"><span data-i18n="marq.cap1"></span><span data-i18n="marq.cap2"></span></div>
   </section>
 
   <section class="hero" aria-labelledby="heroTitle">
@@ -1148,7 +1147,6 @@ en:{
  'hero.capO':'{ser} · Inscription #{n} · {date}<br>{w} × {h} px · {b} bytes, inscribed in witness data',
  'tx.block':'BLOCK','tx.io':'{o} DATA OUTPUTS','tx.wit':'WITNESS DATA','tx.sat':'{s} SAT','tx.verifyO':'Verify on ordinals.com ↗','tx.kb':'KEY-BURNED 1-OF-3 MULTISIG','tx.bare':'BARE 1-OF-3 MULTISIG','tx.olga':'OLGA · P2WSH OUTPUTS','tx.conf':'{c} CONFIRMATIONS','tx.verify':'Verify on mempool.space ↗',
  'fl.in':'1 INPUT','fl.out':'{o} OUTPUTS → UTXO SET','fl.lbl':'output {i} of {o} · {s} sats','fl.lblO':'output {i} of {o} · P2WSH',
- 'marq.cap1':'UTXO art · Ordinals · ACME','marq.cap2':'Mexico City → every full node',
  'loom.eyebrow':'Selected works','loom.title':'Works that live on Bitcoin.','loom.lede':'Paintings, collages and pixel grids, each one held by the network itself. Tap the centre card for its proof.',
  'loom.prev':'Previous work','loom.next':'Next work','loom.open':'View details',
  'layers.eyebrow':'Three ways onto Bitcoin','layers.title':'Where her art lives.','layers.more':'How each layer works →',
@@ -1312,7 +1310,6 @@ es:{
  'hero.capO':'{ser} · Inscripción #{n} · {date}<br>{w} × {h} px · {b} bytes, inscritos en datos witness',
  'tx.block':'BLOQUE','tx.io':'{o} SALIDAS DE DATOS','tx.wit':'DATOS WITNESS','tx.sat':'SAT {s}','tx.verifyO':'Verificar en ordinals.com ↗','tx.kb':'MULTIFIRMA 1 DE 3 CON LLAVE QUEMADA','tx.bare':'MULTIFIRMA 1 DE 3','tx.olga':'OLGA · SALIDAS P2WSH','tx.conf':'{c} CONFIRMACIONES','tx.verify':'Verificar en mempool.space ↗',
  'fl.in':'1 ENTRADA','fl.out':'{o} SALIDAS → UTXO SET','fl.lbl':'salida {i} de {o} · {s} sats','fl.lblO':'salida {i} de {o} · P2WSH',
- 'marq.cap1':'Arte UTXO · Ordinals · ACME','marq.cap2':'Ciudad de México → cada nodo completo',
  'loom.eyebrow':'Obra seleccionada','loom.title':'Obras que viven en Bitcoin.','loom.lede':'Pinturas, collages y cuadrículas de pixeles, cada una resguardada por la red misma. Toca la tarjeta central para ver su prueba.',
  'loom.prev':'Obra anterior','loom.next':'Obra siguiente','loom.open':'Ver detalles',
  'layers.eyebrow':'Tres maneras de estar en Bitcoin','layers.title':'Dónde vive su arte.','layers.more':'Cómo funciona cada capa →',
