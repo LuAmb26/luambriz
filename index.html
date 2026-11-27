@@ -105,7 +105,8 @@ button.chip:hover{border-color:var(--line2)}
   .collect-pill{display:inline-flex}
   .tabs a.t-collect{display:none}
 }
-@media (max-width:420px){.block-chip{display:none}}
+@media (max-width:520px){.block-chip{display:none}}
+@media (max-width:380px){.bar{column-gap:10px}.tools{gap:6px}.tools .chip:not(.icon-chip){padding:0 10px}}
 
 /* views */
 .view{animation:viewIn .45s ease both}
@@ -153,7 +154,7 @@ button.chip:hover{border-color:var(--line2)}
 .marquee{--mq-fs:clamp(72px,12vw,176px);position:relative;background:linear-gradient(180deg,#0c0a24 0%,var(--band) 50%,#0c0a24 100%);padding:calc(34px + var(--mq-fs) * 0.0110) 0 calc(34px - var(--mq-fs) * 0.0110);overflow:hidden;border-bottom:1px solid var(--line)}
 .marquee .mq-glow{position:absolute;inset:34px 0;overflow:hidden}
 .marquee .mq-glow .track{margin-top:calc(var(--mq-fs) * 0.0110)}
-.marquee .track{display:flex;width:max-content;animation:marq 34s linear infinite}
+.marquee .track{display:flex;width:max-content;will-change:transform}
 .marquee .front{position:relative}
 @keyframes marq{to{transform:translateX(-50%)}}
 .gtxt{font-family:var(--f-marq);font-weight:400;font-size:clamp(72px,12vw,176px);line-height:1.04;text-transform:uppercase;white-space:nowrap;padding:0 .14em;background-image:url(img/strip.png);background-size:auto 100%;background-repeat:repeat-x;-webkit-background-clip:text;background-clip:text;color:transparent;image-rendering:pixelated}
@@ -655,6 +656,64 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
 .foot-row a{text-decoration:none;color:var(--fg2)}
 .foot-row a:hover{color:var(--utxo)}
 
+/* r18: contact panel, motion buttons, Home event highlights, Physical inquiries, live block chip */
+body:not(.ready) footer.site{display:none}
+.icon-chip.mail-chip{display:inline-flex}
+.block-chip.is-snap i{background:var(--mute);box-shadow:none}
+.hero-one{margin-top:22px;font-size:clamp(18px,1.55vw,22px);line-height:1.5;color:var(--fg2);max-width:34ch}
+.hero-text .hero-one{max-width:34ch}
+.hero-why{display:flex;flex-wrap:wrap;gap:10px 24px}
+.motion-btn{position:absolute;z-index:4;right:clamp(10px,2vw,22px);bottom:12px;width:40px;height:40px;padding:0;border-radius:50%;border:1px solid var(--line2);background:rgba(7,10,19,.74);color:var(--fg);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:border-color .2s,background-color .2s}
+.motion-btn:hover{border-color:var(--fg2);background:rgba(19,27,48,.92)}
+.motion-btn svg{width:14px;height:14px;display:block}
+.motion-btn .i-play,.still .motion-btn .i-pause{display:none}
+.still .motion-btn .i-play{display:block}
+.loom-ctl .motion-btn{position:static;width:46px;height:46px;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+.perm-fig .motion-btn{top:12px;bottom:auto}
+#evSec,#shSec,.ev2{scroll-margin-top:72px}
+@media (max-width:980px){#evSec,#shSec,.ev2{scroll-margin-top:112px}}
+.ev3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ev3 > article{display:flex;flex-direction:column;min-width:0;border-radius:var(--r);background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:border-color .25s}
+.ev3 > article:hover{border-color:var(--line2)}
+.ev3 .evm{aspect-ratio:4/3;height:auto}
+.ev3 .ev2-body{gap:6px;padding:18px 20px 20px}
+.ev3-t{font-size:20px;line-height:1.2;letter-spacing:-.02em}
+.ev3 .ev-p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ev3-all{margin-top:28px}
+@media (max-width:860px){.ev3{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(82%,360px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px;margin-inline:-4px;padding-inline:4px}.ev3::-webkit-scrollbar{display:none}.ev3 > article{scroll-snap-align:start}}
+.rows .n a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line2)}
+.rows .n a:hover{color:var(--utxo);border-color:var(--utxo)}
+.phy-ask{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;padding:18px 20px;border:1px solid rgba(255,61,139,.4);border-radius:var(--r);background:linear-gradient(90deg,rgba(255,61,139,.07),rgba(255,61,139,0) 70%)}
+.phy-ask p{color:var(--fg2);max-width:64ch;font-size:15px}
+.phy-ask .row{display:flex;flex-wrap:wrap;gap:10px}
+.lb-ask{display:flex;justify-content:center;padding:0 16px 18px;margin-top:-6px}
+.foot-mail{margin-top:22px;font-size:15px;color:var(--mute)}
+.foot-mail a{color:var(--fg);font-family:var(--f-mono);font-size:14.5px;text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:1px}
+.foot-mail a:hover{color:var(--utxo);border-color:var(--utxo)}
+.cpanel .cp-in{display:flex;flex-direction:column;gap:18px;padding:clamp(22px,3vw,34px) clamp(18px,3vw,34px) 44px}
+.cpanel .h2{font-size:clamp(30px,3.4vw,46px)}
+.cp-topics{border:0;margin:0;padding:0;min-width:0}
+.cp-topics legend{padding:0;margin:0 0 10px;font-size:13px;color:var(--fg2)}
+.cp-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cp-chip{position:relative;display:inline-flex}
+.cp-chip input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.cp-chip span{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line2);font-size:14px;color:var(--fg2);transition:border-color .2s,background-color .2s,color .2s;pointer-events:none}
+.cp-chip:hover span{border-color:var(--fg2);color:var(--fg)}
+.cp-chip input:checked + span{background:var(--rosa);border-color:var(--rosa);color:var(--ink);font-weight:600}
+.cp-chip input:focus-visible + span{outline:2px solid var(--utxo);outline-offset:2px}
+.cp-note{border:1px solid rgba(255,61,139,.45);background:rgba(255,61,139,.07);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.55;color:var(--fg2)}
+.cp-f{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--fg2)}
+.cp-f input,.cp-f textarea{font:inherit;font-size:16px;line-height:1.5;color:var(--fg);background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;width:100%;resize:vertical}
+.cp-f input::placeholder,.cp-f textarea::placeholder{color:#6f7997}
+.cp-f input:focus,.cp-f textarea:focus{outline:2px solid var(--utxo);outline-offset:1px}
+.cp-subj{font-family:var(--f-mono);font-size:12px;color:var(--mute);overflow-wrap:anywhere}
+.cp-acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.cp-ok{font-family:var(--f-mono);font-size:12px;color:var(--utxo)}
+.cp-direct{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14px;color:var(--fg2);padding-top:16px;border-top:1px solid var(--line)}
+.cp-direct a{color:var(--fg);font-family:var(--f-mono);font-size:14.5px;text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:1px}
+.cp-fine,.cp-dm{font-size:13px;line-height:1.55;color:var(--mute)}
+.cp-dm a{color:var(--fg2)}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .marquee .track{animation:none}
@@ -673,6 +732,7 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
       <a href="#collect" data-tab="collect" class="t-collect" data-i18n="nav.collect">Collect</a>
     </nav>
     <div class="tools">
+      <a class="chip icon-chip mail-chip" href="#contact" data-i18n-attr="aria-label:nav.contact;title:nav.contact"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.6"/><path d="M4.2 7.2l7.8 5.9 7.8-5.9"/></svg></a>
       <a class="chip icon-chip" href="https://www.instagram.com/lu.aambriz/" target="_blank" rel="noopener" aria-label="Instagram @lu.aambriz"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg></a>
       <a class="chip icon-chip" href="https://x.com/ByLuaambriz" target="_blank" rel="noopener" aria-label="X @ByLuaambriz"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.75 3h3.07l-6.71 7.67L22 21h-6.18l-4.84-6.33L5.44 21H2.37l7.18-8.2L2 3h6.33l4.38 5.79L17.75 3zm-1.08 16.18h1.7L7.4 4.73H5.57l11.1 14.45z"/></svg></a>
       <span class="chip block-chip num" id="blockChip"><i aria-hidden="true"></i><span id="blockChipTxt">Block 973,099</span></span>
@@ -689,6 +749,7 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
   <section class="marquee" aria-label="Lu Ambriz, en cada nodo">
     <div class="mq-glow" aria-hidden="true"><div class="track"><span class="gtxt glow">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span><span class="gtxt glow">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span></div></div>
     <div class="front"><div class="track"><span class="gtxt">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span><span class="gtxt" aria-hidden="true">Lu Ambriz ✶ UTXO Art ✶ En cada nodo ✶ Ordinals ✶ ACME ✶</span></div></div>
+    <button type="button" class="motion-btn" data-motion><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.6" height="12" rx="1" fill="currentColor"/><rect x="9.4" y="2" width="3.6" height="12" rx="1" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 2.4v11.2l9.3-5.6z" fill="currentColor"/></svg></button>
   </section>
 
   <section class="hero" aria-labelledby="heroTitle">
@@ -697,9 +758,8 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
       <div class="hero-text" id="heroText">
         <p class="eyebrow green" data-i18n="hero.eyebrow"></p>
         <h1 class="h1" id="heroTitle" data-i18n-html="hero.title"></h1>
-        <p class="hero-k mono" data-i18n="hero.about"></p>
-        <p class="lede" data-i18n-html="hero.lede"></p>
-        <p class="hero-why"><a class="lnk" href="#onchain" data-i18n="hero.why"></a></p>
+        <p class="hero-one" data-i18n="hero.one"></p>
+        <p class="hero-why"><a class="lnk" href="#story" data-i18n="hero.story"></a><a class="lnk" href="#onchain" data-i18n="hero.why"></a></p>
         <div class="ctas">
           <a class="btn primary" href="#work"><span data-i18n="hero.cta1"></span> <span aria-hidden="true">→</span></a>
           <a class="btn" href="#collect" data-i18n="hero.cta2"></a>
@@ -722,32 +782,6 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
     <div class="txstrip"><div class="wrap num" id="txStrip"></div></div>
   </section>
 
-  <section class="phy-sec band" id="phySec" aria-labelledby="phyHTitle">
-    <div class="wrap">
-      <header class="phy-head">
-        <p class="eyebrow green" data-i18n="pp.eyebrow"></p>
-        <h2 class="phy-title" id="phyHTitle" data-i18n="pp.title"></h2>
-        <p class="phy-lede" data-i18n="pp.lede"></p>
-      </header>
-      <ul class="orbs" id="orbs"></ul>
-      <div class="pnft">
-        <div class="pnft-vis" aria-hidden="true"><img src="img/phy_perla.jpg" alt=""><span class="pnft-link">⇄</span><span class="pnft-tag">NFT</span></div>
-        <div class="pnft-txt"><p class="pnft-k" data-i18n="pp.newk"></p><h3 data-i18n="pp.newt"></h3><p class="pnft-p" data-i18n="pp.newp"></p></div>
-        <div class="pnft-ctas"><a class="btn primary" href="#physical"><span data-i18n="pp.cta1"></span> <span aria-hidden="true">→</span></a><a class="btn" href="#g-commission" data-i18n="pp.cta2"></a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="feat-sec band pad" id="evSec" aria-labelledby="feTitle">
-    <div class="wrap">
-      <div class="sec-head">
-        <div><p class="eyebrow green" id="feEyebrow"></p><h2 class="h2" id="feTitle" data-i18n="fe.title"></h2></div>
-        <div style="max-width:48ch"><p class="body" data-i18n="fe.lede"></p></div>
-      </div>
-      <div id="featured"></div>
-    </div>
-  </section>
-
   <section class="loom-sec band pad" aria-labelledby="loomTitle">
     <div class="wrap">
       <div class="sec-head">
@@ -766,9 +800,37 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
           <button type="button" class="round" id="loomPrev" data-i18n-attr="aria-label:loom.prev">←</button>
           <span class="loom-count num" id="loomN"></span>
           <button type="button" class="round" id="loomNext" data-i18n-attr="aria-label:loom.next">→</button>
+          <button type="button" class="round motion-btn" data-motion><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.6" height="12" rx="1" fill="currentColor"/><rect x="9.4" y="2" width="3.6" height="12" rx="1" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 2.4v11.2l9.3-5.6z" fill="currentColor"/></svg></button>
           <a class="btn sm" id="loomOpen" href="#work" data-i18n="loom.open"></a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="phy-sec band" id="phySec" aria-labelledby="phyHTitle">
+    <div class="wrap">
+      <header class="phy-head">
+        <p class="eyebrow green" data-i18n="pp.eyebrow"></p>
+        <h2 class="phy-title" id="phyHTitle" data-i18n="pp.title"></h2>
+        <p class="phy-lede" data-i18n="pp.lede"></p>
+      </header>
+      <ul class="orbs" id="orbs"></ul>
+      <div class="pnft">
+        <div class="pnft-vis" aria-hidden="true"><img src="img/phy_perla.jpg" alt="" loading="lazy" data-w="320"><span class="pnft-link">⇄</span><span class="pnft-tag">NFT</span></div>
+        <div class="pnft-txt"><p class="pnft-k" data-i18n="pp.newk"></p><h3 data-i18n="pp.newt"></h3><p class="pnft-p" data-i18n="pp.newp"></p></div>
+        <div class="pnft-ctas"><a class="btn primary" href="#physical"><span data-i18n="pp.cta1"></span> <span aria-hidden="true">→</span></a><a class="btn" href="#contact-commission" data-i18n="pp.cta2"></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feat-sec band pad" id="evHome" aria-labelledby="feTitleH">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow green" id="feEyebrowH"></p><h2 class="h2" id="feTitleH" data-i18n="fe.title"></h2></div>
+        <div style="max-width:48ch"><p class="body" data-i18n="fe.lede"></p></div>
+      </div>
+      <div class="ev3" id="featHome"></div>
+      <p class="ev3-all"><a class="btn" href="#events"><span data-i18n="fe.all"></span> <span aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
@@ -789,13 +851,13 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
         <a class="btn primary" href="#collect"><span data-i18n="offers.cta"></span> <span aria-hidden="true">→</span></a>
       </div>
       <div class="offers" id="offersHome"></div>
-      <p class="snap" data-i18n="snap.note"></p>
+      <p class="snap" id="snapNote" data-i18n="snap.note"></p>
     </div>
   </section>
 
   <section class="band pad" aria-labelledby="qTitle">
     <div class="wrap quote-band">
-      <img class="bw" src="img/lu_bw.jpg" alt="" loading="lazy" data-i18n-attr="alt:alt.bw">
+      <img class="bw" src="img/lu_bw.jpg" alt="" loading="lazy" data-w="560" data-i18n-attr="alt:alt.bw">
       <div>
         <p class="eyebrow" data-i18n="qt.eyebrow"></p>
         <blockquote id="qTitle"><p class="bq">“Mi arte no se copia. Se transforma. No se guarda. Se perpetúa.”</p></blockquote>
@@ -855,12 +917,14 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
       <div>
         <p class="eyebrow" data-i18n="story.eyebrow"></p>
         <h1 class="h2" data-i18n="story.title" style="font-size:clamp(36px,5vw,72px)"></h1>
-        <p class="lede" style="margin-top:24px" data-i18n="story.p1"></p>
-        <p class="body" style="margin-top:16px" data-i18n="story.p2"></p>
+        <p class="hero-k mono" data-i18n="hero.about"></p>
+        <p class="lede" style="margin-top:12px" data-i18n-html="hero.lede"></p>
+        <p class="body" style="margin-top:16px" data-i18n="story.p1"></p>
+        <p class="body" data-i18n="story.p2"></p>
         <p class="body" data-i18n-html="story.p3"></p>
         <p class="body" data-i18n="story.p4"></p>
       </div>
-      <img src="img/lu_cosmic.jpg" alt="" loading="lazy" data-i18n-attr="alt:alt.cosmic">
+      <img src="img/lu_cosmic.jpg" alt="" loading="lazy" data-w="560" data-i18n-attr="alt:alt.cosmic">
     </div>
   </section>
   <section class="pad band" aria-labelledby="edTitle" style="background:var(--bg2)">
@@ -892,15 +956,25 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
       </div>
     </div>
   </section>
-  <section class="pad band" aria-labelledby="shTitle">
+  <section class="feat-sec band pad" id="evSec" aria-labelledby="feTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow green" id="feEyebrow"></p><h2 class="h2" id="feTitle" data-i18n="fe.title"></h2></div>
+        <div style="max-width:48ch"><p class="body" data-i18n="fe.lede"></p></div>
+      </div>
+      <div id="featured"></div>
+    </div>
+  </section>
+
+  <section class="pad band" id="shSec" aria-labelledby="shTitle">
     <div class="wrap">
       <div class="sec-head"><div><p class="eyebrow" data-i18n="sh.eyebrow"></p><h2 class="h2" id="shTitle" data-i18n="sh.title"></h2></div></div>
       <ul class="rows" id="shown"></ul>
       <div class="brands-wrap"><p class="sub" data-i18n="br.title"></p><ul class="brand-list" id="brands"></ul><p class="body" style="margin-top:16px" data-i18n="br.open"></p></div>
       <div class="photos" style="margin-top:44px">
-        <figure><img src="img/talk_panel.jpg" alt="" loading="lazy" data-i18n-attr="alt:alt.panel"><figcaption data-i18n="ph.panel"></figcaption></figure>
-        <figure><img src="img/xverse_group.jpg" alt="" loading="lazy" data-i18n-attr="alt:alt.xverse"><figcaption data-i18n="ph.xverse"></figcaption></figure>
-        <figure><img src="img/lu_steps.jpg" alt="" loading="lazy" data-i18n-attr="alt:alt.steps"><figcaption data-i18n="ph.steps"></figcaption></figure>
+        <figure><img src="img/talk_panel.jpg" alt="" loading="lazy" data-w="440" data-i18n-attr="alt:alt.panel"><figcaption data-i18n="ph.panel"></figcaption></figure>
+        <figure><img src="img/xverse_group.jpg" alt="" loading="lazy" data-w="440" data-i18n-attr="alt:alt.xverse"><figcaption data-i18n="ph.xverse"></figcaption></figure>
+        <figure><img src="img/lu_steps.jpg" alt="" loading="lazy" data-w="440" data-i18n-attr="alt:alt.steps"><figcaption data-i18n="ph.steps"></figcaption></figure>
       </div>
     </div>
   </section>
@@ -913,6 +987,10 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
       <div class="sec-head">
         <div><p class="eyebrow" data-i18n="phy.eyebrow"></p><h1 class="h2" data-i18n="phy.title" style="font-size:clamp(36px,5vw,72px)"></h1></div>
         <p class="body" style="max-width:48ch" data-i18n="phy.lede"></p>
+      </div>
+      <div class="phy-ask">
+        <p data-i18n="phy.sale"></p>
+        <div class="row"><a class="btn sm primary" href="#contact-commission" data-i18n="pp.cta2"></a><a class="btn sm" href="#contact-piece" data-i18n="phy.ask"></a></div>
       </div>
       <div id="gallery"></div>
     </div>
@@ -938,7 +1016,7 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
       </div>
       <ol class="tiers" id="tiers"></ol>
       <div class="perm">
-        <figure class="perm-fig"><canvas id="nodes" aria-hidden="true"></canvas><figcaption class="perm-cap" data-i18n="oa.cap"></figcaption></figure>
+        <figure class="perm-fig"><canvas id="nodes" aria-hidden="true"></canvas><button type="button" class="motion-btn" data-motion><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.6" height="12" rx="1" fill="currentColor"/><rect x="9.4" y="2" width="3.6" height="12" rx="1" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 2.4v11.2l9.3-5.6z" fill="currentColor"/></svg></button><figcaption class="perm-cap" data-i18n="oa.cap"></figcaption></figure>
         <div class="perm-txt">
           <h3 class="h3" data-i18n="oa.ptitle"></h3>
           <ul class="perm-list" id="permList"></ul>
@@ -1024,7 +1102,7 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
           <p class="sub" id="availTitle" data-i18n="gs.avail"></p>
           <div class="table-wrap"><table class="avail num" id="availTable"></table></div>
           <button type="button" class="btn sm" id="availMore" style="margin-top:12px"></button>
-          <div class="snap"><span data-i18n="snap.disp"></span><button type="button" class="btn sm" id="liveBtn" data-i18n="snap.live"></button><span id="liveMsg" aria-live="polite"></span></div>
+          <div class="snap"><span id="snapDisp" data-i18n="snap.disp"></span><button type="button" class="btn sm" id="liveBtn" data-i18n="snap.live"></button><span id="liveMsg" aria-live="polite"></span></div>
           <p class="body" style="margin-top:14px;font-size:14px" id="noneLine"></p>
         </div>
       </div>
@@ -1060,13 +1138,14 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
         <aside><p class="eyebrow" style="color:var(--rosa)" data-i18n="gc.k"></p><h2 class="h2" data-i18n="gc.title"></h2><p class="body" data-i18n="gc.lede"></p></aside>
         <div>
           <div class="masonry" style="columns:2 220px">
-            <figure><img src="img/phys_perla.jpg" alt="" loading="lazy" data-i18n-attr="alt:alt.perla"><figcaption data-i18n="gc.c1"></figcaption></figure>
-            <figure><img src="img/boot_gallery.jpg" alt="" loading="lazy" data-i18n-attr="alt:alt.boot"><figcaption data-i18n="gc.c2"></figcaption></figure>
+            <figure><img src="img/phys_perla.jpg" alt="" loading="lazy" data-w="320" data-i18n-attr="alt:alt.perla"><figcaption data-i18n="gc.c1"></figcaption></figure>
+            <figure><img src="img/boot_gallery.jpg" alt="" loading="lazy" data-w="320" data-i18n-attr="alt:alt.boot"><figcaption data-i18n="gc.c2"></figcaption></figure>
           </div>
           <div class="box" style="margin-top:8px">
             <h4 data-i18n="gc.how"></h4>
             <p data-i18n="gc.howp"></p>
             <div class="row">
+              <a class="btn sm primary" href="#contact-commission" data-i18n="cp.cta"></a>
               <a class="btn sm" href="https://www.instagram.com/lu.aambriz/" target="_blank" rel="noopener">Instagram @lu.aambriz ↗</a>
               <a class="btn sm" href="https://x.com/ByLuaambriz" target="_blank" rel="noopener">X @ByLuaambriz ↗</a>
               <a class="btn sm" href="https://linktr.ee/luambriz" target="_blank" rel="noopener">Linktree ↗</a>
@@ -1093,7 +1172,8 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
   <div class="wrap foot-in">
     <p class="eyebrow" data-i18n="ft.eyebrow"></p>
     <h2 class="foot-h" data-i18n="ft.title"></h2>
-    <div class="ctas"><a class="btn primary" href="#collect" data-i18n="ft.collect"></a><a class="btn" href="https://www.instagram.com/lu.aambriz/" target="_blank" rel="noopener" data-i18n="ft.msg"></a></div>
+    <div class="ctas"><a class="btn primary" href="#collect" data-i18n="ft.collect"></a><a class="btn" href="#contact" data-i18n="ft.msg"></a></div>
+    <p class="foot-mail"><a id="ftMail" href="#contact"></a></p>
     <div class="foot-row">
       <nav aria-label="Social">
         <a href="https://www.instagram.com/lu.aambriz/" target="_blank" rel="noopener">Instagram</a>
@@ -1120,6 +1200,25 @@ footer.site{border-top:1px solid var(--line);background:var(--bg)}
   </div>
   <div class="dbody" id="dBody"></div>
 </aside>
+<aside class="drawer cpanel" id="cpanel" role="dialog" aria-modal="true" aria-labelledby="cpTitle" hidden>
+  <div class="dhead"><span class="mono" data-i18n="cp.k"></span>
+    <div class="dnav"><button type="button" id="cpClose" data-i18n-attr="aria-label:d.close">✕</button></div>
+  </div>
+  <div class="dbody"><div class="cp-in">
+    <div><h2 class="h2" id="cpTitle" data-i18n="cp.title"></h2><p class="body" style="margin-top:12px" data-i18n="cp.lede"></p></div>
+    <form id="cpForm" novalidate style="display:flex;flex-direction:column;gap:18px">
+      <fieldset class="cp-topics"><legend data-i18n="cp.topicL"></legend><div class="cp-chips" id="cpTopics"></div></fieldset>
+      <p class="cp-note" id="cpNote" hidden></p>
+      <label class="cp-f"><span data-i18n="cp.name"></span><input id="cpName" type="text" autocomplete="name" maxlength="80"></label>
+      <label class="cp-f"><span data-i18n="cp.msg"></span><textarea id="cpMsg" rows="6" maxlength="2000"></textarea></label>
+      <p class="cp-subj" id="cpSubj"></p>
+      <div class="cp-acts"><a class="btn primary" id="cpSend" href="#contact"><span data-i18n="cp.send"></span> <span aria-hidden="true">↗</span></a><button type="button" class="btn" id="cpCopy" data-i18n="cp.copy"></button><span class="cp-ok" id="cpOk" aria-live="polite"></span></div>
+      <p class="cp-direct"><span data-i18n="cp.direct"></span> <a id="cpAddr" href="#contact"></a> <button type="button" class="btn sm" id="cpCopyAddr" data-i18n="cp.copyAddr"></button></p>
+      <p class="cp-fine" data-i18n="cp.fine"></p>
+      <p class="cp-dm"><span data-i18n="cp.dm"></span> <a href="https://www.instagram.com/lu.aambriz/" target="_blank" rel="noopener">Instagram @lu.aambriz ↗</a> · <a href="https://x.com/ByLuaambriz" target="_blank" rel="noopener">X @ByLuaambriz ↗</a></p>
+    </form>
+  </div></div>
+</aside>
 <div class="tip" id="tip" aria-hidden="true"></div>
 
 <script>
@@ -1129,6 +1228,14 @@ const B64_55421 = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6
 'use strict';
 const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const THUMBS = {"img/acme_desierto.jpg":[160,360,720],"img/acme_dolor.jpg":[160,360],"img/acme_dreams.jpg":[160,360,720],"img/acme_frida.jpg":[160,360,720],"img/acme_invisible.webp":[160,360],"img/acme_kahlo.webp":[160,360],"img/acme_noppal.jpg":[160,360,720],"img/acme_ppboots.jpg":[160,360,720],"img/acme_queen.webp":[160,360],"img/acme_toro.jpg":[160,360,720],"img/acme_vaquero.jpg":[160,360,720],"img/bali_queen.jpg":[160,360],"img/bali_screen.jpg":[160,360],"img/boot_gallery.jpg":[160,360,720],"img/coloragain.jpg":[160,360,720],"img/comic.jpg":[160,360,720],"img/eth_ofrenda.jpg":[160,360,720],"img/ev2_bali_cut.webp":[160,360,720],"img/ev2_bali_framed.jpg":[160,360,720],"img/ev2_barroco_dusk.jpg":[160,360,720],"img/ev2_barroco_ext.jpg":[160,360,720],"img/ev2_barroco_lu.jpg":[160,360,720],"img/ev2_barroco_paint.jpg":[160,360,720],"img/ev2_barroco_screen.jpg":[160,360,720],"img/ev2_comic.jpg":[160,360,720],"img/ev2_comic_promo.jpg":[160,360,720],"img/ev2_flores_art.jpg":[160,360,720,1280],"img/ev2_flores_g1.jpg":[160,360,720],"img/ev2_flores_g2.jpg":[160,360,720],"img/ev2_flores_g3.jpg":[160,360,720],"img/ev2_ll_duo.jpg":[160,360],"img/ev2_ll_lot.jpg":[160,360,720],"img/ev2_ll_panel.jpg":[160,360,720,1280],"img/ev2_ll_stage1.jpg":[160,360,720],"img/ev2_ll_stage2.jpg":[160,360,720],"img/ev2_ll_today.jpg":[160,360],"img/ev2_obey_crowd.jpg":[160,360],"img/ev2_pf_crowd.jpg":[160,360],"img/ev2_pf_eboli.jpg":[160,360],"img/ev2_pf_entry.jpg":[160,360],"img/ev2_pf_led.jpg":[160,360,720],"img/ev2_pf_wall.jpg":[160,360,720],"img/ev2_punks_crowd.jpg":[160,360],"img/ev2_resist.jpg":[160,360,720],"img/ev2_soumaya_david.jpg":[160,360],"img/ev2_soumaya_night.jpg":[160,360,720],"img/ev2_soumaya_purple.jpg":[160,360,720],"img/ev2_utopia.jpg":[160,360,720],"img/ev2_xv_group.jpg":[160,360,720,1280],"img/ev2_xv_lu.jpg":[160,360,720],"img/ev_barroco.jpg":[160,360,720],"img/ev_locos_lu.jpg":[160,360,720],"img/ev_punklot.jpg":[160,360,720],"img/ev_soumaya_night.jpg":[160,360,720],"img/evo_andy.jpg":[160,360,720],"img/evo_creation.jpg":[160,360,720],"img/evo_dali.jpg":[160,360,720],"img/evo_frida.jpg":[160,360,720],"img/evo_fridadiego.jpg":[160,360,720],"img/evo_lostsky.jpg":[160,360,720],"img/evo_marilyn.jpg":[160,360,720],"img/evo_perla.jpg":[160,360,720],"img/evo_prince.jpg":[160,360,720],"img/evo_smokey.jpg":[160,360,720],"img/frida_tree.jpg":[160,360,720],"img/hero/s836089.jpg":[160,360,720],"img/lastsupper.jpg":[160,360,720],"img/logo.jpg":[160,360,720],"img/lote_infernal.jpg":[160,360],"img/lote_kicker.jpg":[160,360],"img/lote_kikiri.jpg":[160,360],"img/lote_muerte.jpg":[160,360],"img/lote_pisto.jpg":[160,360],"img/lu_bw.jpg":[160,360,720],"img/lu_cosmic.jpg":[160,360,720],"img/lu_painting.jpg":[160,360,720],"img/lu_steps.jpg":[160,360,720,1280],"img/maiz.jpg":[160,360,720],"img/mc_1072.jpg":[160,360],"img/mc_1084.jpg":[160,360],"img/mc_1091.jpg":[160,360],"img/mc_1116.jpg":[160,360],"img/mc_1188.jpg":[160,360],"img/merch_case_frida.jpg":[160,360,720],"img/merch_notebook.jpg":[160,360,720],"img/merch_notebook_perla.jpg":[160,360,720],"img/merch_tee.jpg":[160,360,720],"img/merch_tote.jpg":[160,360,720],"img/merch_tote_scream.jpg":[160,360],"img/ord_kneeling.webp":[160,360],"img/ord_moonlizard.webp":[160],"img/ord_peeking.webp":[160,360,720],"img/ord_xolotl.webp":[160,360],"img/pg_cape.jpg":[160,360],"img/pg_cape_design.jpg":[160,360,720,1280],"img/pg_jump.jpg":[160,360,720],"img/pg_jump_sketch.jpg":[160,360,720],"img/pg_neon_mask.jpg":[160,360,720],"img/pg_soumaya_night.jpg":[160,360,720],"img/pg_texuni.jpg":[160,360],"img/pg_uv_crown.jpg":[160,360,720,1280],"img/pg_uv_painting.jpg":[160,360,720],"img/pg_uv_profile.jpg":[160,360,720],"img/pg_uv_skeleton.jpg":[160,360,720],"img/pg_uv_skull.jpg":[160,360,720],"img/pg_uv_smile.jpg":[160,360],"img/pg_uv_yellow.jpg":[160,360,720,1280],"img/phy_crab.jpg":[160,360],"img/phy_face.jpg":[160,360],"img/phy_frida.jpg":[160,360],"img/phy_ghost.jpg":[160,360],"img/phy_goles.jpg":[160,360],"img/phy_guitar.jpg":[160,360],"img/phy_marilyn.jpg":[160,360],"img/phy_perla.jpg":[160,360],"img/phy_rarepepe.jpg":[160,360],"img/phy_starry.jpg":[160,360],"img/phyf_crab.jpg":[160,360,720,1280],"img/phyf_face.jpg":[160,360,720],"img/phyf_frida.jpg":[160,360,720],"img/phyf_ghost.jpg":[160,360,720],"img/phyf_goles.jpg":[160,360,720],"img/phyf_guitar.jpg":[160,360,720],"img/phyf_marilyn.jpg":[160,360,720],"img/phyf_perla.jpg":[160,360,720],"img/phyf_rarepepe.jpg":[160,360,720],"img/phyf_starry.jpg":[160,360,720,1280],"img/phys_perla.jpg":[160,360,720,1280],"img/s1265678.jpg":[160,360],"img/s434095.jpg":[160,360],"img/s741437.jpg":[160,360],"img/s746290.jpg":[160,360,720],"img/s836089.jpg":[160,360],"img/s836476.jpg":[160,360],"img/talk_panel.jpg":[160,360,720,1280],"img/talk_stage.jpg":[160,360,720],"img/xverse_group.jpg":[160,360,720,1280]};   /* the public build fills this in: image path -> widths of its smaller WebP copies in img/w<width>/ */
+const tsrc = (src, need) => { const s = THUMBS[src]; if (s) for (const w of s) if (w >= need) return src.replace(/^img\//, 'img/w' + w + '/').replace(/\.[a-z0-9]+$/i, '.webp'); return src; };
+const isrc = (src, w) => { if (!THUMBS[src]) return ' src="' + src + '"'; const a = tsrc(src, w), b = tsrc(src, w * 2), c = tsrc(src, w * 3); return ' src="' + a + '" srcset="' + a + ' 1x, ' + b + ' 2x' + (c !== b ? ', ' + c + ' 3x' : '') + '"'; };
+const MAIL = ['luambriz', 'proton.me'].join('@');
+let STILL = REDUCE;   /* motion paused: starts paused with reduce-motion, then follows the pause/play button (remembered) */
+try { const m = localStorage.getItem('lu-motion'); if (m === 'off' || m === 'on') STILL = m === 'off'; } catch(e) {}
+const motionHooks = [];
+const LIVE = {tip: 0, disp: 0};
 const CSSV = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -1136,6 +1243,20 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const I18N = {
 en:{
  'nav.home':'Home','nav.work':'Work','nav.story':'Story','nav.physical':'Physical','nav.onchain':'On-chain','nav.collect':'Collect',
+ 'nav.contact':'Write to Lu','mo.pause':'Pause motion','mo.play':'Play motion',
+ 'hero.one':'Lu Ambriz writes her work into Bitcoin itself.','hero.story':'Her story →','fe.all':'See all exhibitions and events','fe.more':'Read more',
+ 'chip.live':'Latest Bitcoin block, live from mempool.space','chip.snap':'Bitcoin block when the catalog was read (October 25, 2026)',
+ 'snap.noteLive':'Dispenser prices and counts are live from the Counterparty API. ACME edition counts are from acme.pics on November 3, 2026.','snap.dispLive':'Live from the Counterparty API. Dispensers change as people buy.','snap.okAt':'Live from the Counterparty API, checked at {t}.',
+ 'd.dispLive':'Open dispensers right now, live from the Counterparty API. Each payment of the exact price buys one unit.','d.nodispLive':'No open dispenser right now. Check xcp.io and stampchain.io for new dispensers, and Horizon for offers.',
+ 'cp.k':'Contact','cp.title':'Write to Lu','cp.cta':'Write to Lu','cp.lede':'Commissions, questions about a physical piece, collaborations and press.','cp.topicL':'What is it about?',
+ 'cp.t.commission':'Commission','cp.t.piece':'A physical piece','cp.t.collab':'Collaboration or event','cp.t.press':'Press','cp.t.other':'Something else',
+ 'cp.noteP':'None of the physical pieces is for sale right now, but questions are welcome, and so are commissions.','cp.name':'Your name','cp.msg':'Your message',
+ 'cp.ph.commission':'What would you like? Size, place, timing and budget all help.','cp.ph.piece':'Which piece, and what would you like to know?','cp.ph.collab':'Tell Lu about the event, brand or project, with dates.','cp.ph.press':'Your outlet, the story and your deadline.','cp.ph.other':'Your message',
+ 'cp.subj':'Subject: {s}','cp.send':'Open in my email app','cp.copy':'Copy message','cp.copied':'Copied','cp.direct':'Or write directly to','cp.copyAddr':'Copy address',
+ 'cp.fine':'This site doesn’t send or keep anything. Your own email app sends the message.','cp.dm':'Prefer a DM?',
+ 'cp.s.commission':'Commission request','cp.s.piece':'Question about {p}','cp.s.aPiece':'a physical piece','cp.s.collab':'Collaboration or event','cp.s.press':'Press inquiry','cp.s.other':'Hello from your website',
+ 'cp.hi':'Hi Lu,','cp.sig':'sent from luambriz.ar.io',
+ 'phy.sale':'None of these pieces is for sale right now. You can commission your own, or ask about one.','phy.ask':'Ask about a piece','lb.ask':'Ask about this piece',
  'block':'Block','lang.btn':'ES','lang.aria':'Ver en español',
  'hero.eyebrow':'One of the few Mexican artists who pioneered on-chain art on Bitcoin','hero.about':'About Lu · Model and multifaceted artist',
  'hero.title':'Pixel by pixel,<br>into every node.',
@@ -1228,7 +1349,7 @@ en:{
  'gs.wallets':'Wallets','gs.where':'Where to look',
  'gs.avail':'Available from dispensers',
  'av.more':'Show all {n}','av.less':'Show fewer','th.work':'Work','th.price':'Lowest price','th.left':'Left at that price','th.disp':'Dispensers','th.links':'Links',
- 'snap.disp':'Snapshot from block 973,099, October 25, 2026. Dispensers change as people buy.','snap.live':'Check live data','snap.ok':'Updated from the Counterparty API just now.','snap.fail':'Live data isn’t reachable from this preview. Open a work on xcp.io or stampchain.io for current listings.','snap.wait':'Checking…',
+ 'snap.disp':'Snapshot from block 973,099, October 25, 2026. Dispensers change as people buy.','snap.live':'Check live data','snap.ok':'Updated from the Counterparty API just now.','snap.fail':'Live data didn’t load. These prices are from block 973,099 (October 25, 2026); xcp.io and stampchain.io show current listings.','snap.wait':'Checking…',
  'gs.none':'No open dispenser at the snapshot: {list}. Watch xcp.io and stampchain.io for new ones.',
  'go.k':'Route 2 · Witness','go.title':'Ordinals','go.lede':'EVOLUCION is a series of ten Ordinals from 2024. Each piece has a mintable edition drop on Gamma. PEPE COMIC BOOK has ten delegate editions. Early 1/1 inscriptions trade when their owners list them.',
  'go.s1t':'Set up an Ordinals wallet','go.s1p':'Xverse, Leather or UniSat. They keep inscriptions in a separate Taproot address.',
@@ -1246,18 +1367,18 @@ en:{
  'snap.acme':'Edition counts from acme.pics on November 3, 2026.','ed.free':'Free mint','d.acmeEdFree':'Open edition {name}: {s} of {m} minted. It is free to mint; you pay only the network fee. Mint on acme.pics with UniSat Wallet, using its native SegWit (bc1q…) address.',
  'gc.k':'Route 4 · By hand','gc.title':'Commissions and physical work','gc.lede':'Lu paints pixel works on canvas square by square, builds sculpture, paints live at events and works with brands and museums. Every physical piece she sells now includes its own NFT as a certificate of authenticity.',
  'gc.c1':'Perla, pixel painting on canvas, 2023','gc.c2':'Donde nacen los goles, sculpture for Locos Por El Arte, 2026',
- 'gc.how':'Start a conversation','gc.howp':'Message Lu on Instagram or X with what you have in mind: size, place, timing. A contact email for commissions is coming.',
+ 'gc.how':'Start a conversation','gc.howp':'Tell Lu what you have in mind: size, place, timing. Write to her by email, or message her on Instagram or X.',
  'gl.k':'Glossary','gl.title':'Words you’ll meet.',
  'sf.title':'Stay safe',
  'sf1.t':'Check the number','sf1.p':'Copies of images circulate. Match the work number, asset ID or inscription ID with this site before paying.',
  'sf2.t':'Keep your phrase private','sf2.p':'No artist, marketplace or support agent will ever ask for your recovery phrase.',
  'sf3.t':'One unit at a time','sf3.p':'Dispensers can empty between blocks. Buy one unit per payment and pay the exact price.',
  'sf4.t':'Mind the fee','sf4.p':'Network fees rise and fall with demand. Check the fee before you confirm.',
- 'ft.eyebrow':'Lu Ambriz · Mexico City','ft.title':'Collect, commission, collaborate.','ft.collect':'How to collect','ft.msg':'Message on Instagram ↗','ft.snap':'Read from Bitcoin at block 973,099 · October 25, 2026',
+ 'ft.eyebrow':'Lu Ambriz · Mexico City','ft.title':'Collect, commission, collaborate.','ft.collect':'How to collect','ft.msg':'Write to Lu','ft.snap':'Read from Bitcoin at block 973,099 · October 25, 2026',
  'work.other':'Also on Ethereum and Base ↓','lbl.utxo':'UTXO art · #{n}',
  'fe.eyebrow':'{n} events · 2024–2026','fe.title':'Expos & Events','fe.lede':'From Beeple Studios in South Carolina to museums in Puebla and Mexico City and a show in Bali, her work has filled LED walls, museum screens, festivals and public space.',
  'fe.g1':'Beeple Studios · Charleston, USA','fe.g1s':'Beeple (Mike Winkelmann) is the American digital artist behind Everydays, the daily-art series he began in 2007; in 2021 his NFT Everydays: The First 5000 Days sold at Christie’s for $69 million.','fe.g2':'Mexico','fe.g2s':'Museums, festivals, stages and the city.','fe.g3':'And beyond','fe.g3s':'Bali and the Bitcoin art community.',
- 'fe.alsoK':'Also shown at','fe.alsoGo':'Full list in her story','fe.video':'Video',
+ 'fe.alsoK':'Also shown at','fe.alsoGo':'The full list','fe.video':'Video',
  'soc.follow':'Follow Lu',
  'pp.eyebrow':'Physical work','pp.title':'Physical pieces','pp.lede':'The pixel, by hand. Lu paints her on-chain works back onto canvas, square by square, so the same art lives in the blockchain and on the wall. She also paints sculpture and objects.','pp.sub':'Pixel painting on canvas','pp.subS':'Pixel painting on canvas',
  'pp.newk':'New · Physical + NFT','pp.newt':'From now on, every physical piece she sells comes with its own NFT.','pp.newp':'A certificate of authenticity and a digital collectible in one. The NFT travels with the canvas and links her physical work to the chain.','pp.cta1':'See all physical work','pp.cta2':'Commission a piece',
@@ -1299,6 +1420,20 @@ en:{
 },
 es:{
  'nav.home':'Inicio','nav.work':'Obra','nav.story':'Historia','nav.physical':'Obra física','nav.onchain':'On-chain','nav.collect':'Coleccionar',
+ 'nav.contact':'Escríbele a Lu','mo.pause':'Pausar movimiento','mo.play':'Reanudar movimiento',
+ 'hero.one':'Lu Ambriz escribe su obra dentro de Bitcoin.','hero.story':'Su historia →','fe.all':'Ver todas las exposiciones y eventos','fe.more':'Leer más',
+ 'chip.live':'Último bloque de Bitcoin, en vivo desde mempool.space','chip.snap':'Bloque de Bitcoin en que se leyó el catálogo (25 de octubre de 2026)',
+ 'snap.noteLive':'Precios y dispensadores en vivo desde la API de Counterparty. Ediciones de ACME según acme.pics al 3 de noviembre de 2026.','snap.dispLive':'En vivo desde la API de Counterparty. Los dispensadores cambian conforme la gente compra.','snap.okAt':'En vivo desde la API de Counterparty, revisado a las {t}.',
+ 'd.dispLive':'Dispensadores abiertos ahora mismo, en vivo desde la API de Counterparty. Cada pago del precio exacto compra una unidad.','d.nodispLive':'Sin dispensador abierto ahora mismo. Revisa xcp.io y stampchain.io para nuevos dispensadores, y Horizon para ofertas.',
+ 'cp.k':'Contacto','cp.title':'Escríbele a Lu','cp.cta':'Escríbele a Lu','cp.lede':'Encargos, preguntas sobre una pieza física, colaboraciones y prensa.','cp.topicL':'¿De qué se trata?',
+ 'cp.t.commission':'Encargo','cp.t.piece':'Una pieza física','cp.t.collab':'Colaboración o evento','cp.t.press':'Prensa','cp.t.other':'Otra cosa',
+ 'cp.noteP':'Por ahora ninguna pieza física está a la venta, pero las preguntas son bienvenidas, y los encargos también.','cp.name':'Tu nombre','cp.msg':'Tu mensaje',
+ 'cp.ph.commission':'¿Qué te gustaría? Tamaño, lugar, tiempos y presupuesto ayudan.','cp.ph.piece':'¿Qué pieza, y qué te gustaría saber?','cp.ph.collab':'Cuéntale a Lu del evento, la marca o el proyecto, con fechas.','cp.ph.press':'Tu medio, la historia y tu fecha límite.','cp.ph.other':'Tu mensaje',
+ 'cp.subj':'Asunto: {s}','cp.send':'Abrir en mi app de correo','cp.copy':'Copiar mensaje','cp.copied':'Copiado','cp.direct':'O escribe directo a','cp.copyAddr':'Copiar dirección',
+ 'cp.fine':'Este sitio no envía ni guarda nada. Tu propia app de correo envía el mensaje.','cp.dm':'¿Prefieres un mensaje directo?',
+ 'cp.s.commission':'Solicitud de encargo','cp.s.piece':'Pregunta sobre {p}','cp.s.aPiece':'una pieza física','cp.s.collab':'Colaboración o evento','cp.s.press':'Prensa','cp.s.other':'Hola desde tu sitio',
+ 'cp.hi':'Hola, Lu:','cp.sig':'enviado desde luambriz.ar.io',
+ 'phy.sale':'Por ahora ninguna de estas piezas está a la venta. Puedes encargar la tuya o preguntar por alguna.','phy.ask':'Preguntar por una pieza','lb.ask':'Preguntar por esta pieza',
  'block':'Bloque','lang.btn':'EN','lang.aria':'View in English',
  'hero.eyebrow':'Entre los pocos artistas mexicanos que abrieron camino al arte on-chain en Bitcoin','hero.about':'Sobre Lu · Modelo y artista multifacética',
  'hero.title':'Pixel a pixel,<br>en cada nodo.',
@@ -1391,7 +1526,7 @@ es:{
  'gs.wallets':'Wallets','gs.where':'Dónde buscar',
  'gs.avail':'Disponibles en dispensadores',
  'av.more':'Ver las {n}','av.less':'Ver menos','th.work':'Obra','th.price':'Precio más bajo','th.left':'Quedan a ese precio','th.disp':'Dispensadores','th.links':'Enlaces',
- 'snap.disp':'Datos del bloque 973,099, 25 de octubre de 2026. Los dispensadores cambian conforme la gente compra.','snap.live':'Revisar datos en vivo','snap.ok':'Actualizado ahora desde la API de Counterparty.','snap.fail':'Los datos en vivo no están disponibles en esta vista previa. Abre una obra en xcp.io o stampchain.io para ver sus listados actuales.','snap.wait':'Revisando…',
+ 'snap.disp':'Datos del bloque 973,099, 25 de octubre de 2026. Los dispensadores cambian conforme la gente compra.','snap.live':'Revisar datos en vivo','snap.ok':'Actualizado ahora desde la API de Counterparty.','snap.fail':'Los datos en vivo no cargaron. Estos precios son del bloque 973,099 (25 de octubre de 2026); xcp.io y stampchain.io muestran los listados actuales.','snap.wait':'Revisando…',
  'gs.none':'Sin dispensador abierto en la toma de datos: {list}. Revisa xcp.io y stampchain.io para nuevos.',
  'go.k':'Ruta 2 · Witness','go.title':'Ordinals','go.lede':'EVOLUCION es una serie de diez Ordinals de 2024. Cada pieza tiene un drop de ediciones en Gamma. PEPE COMIC BOOK tiene diez ediciones delegadas. Las inscripciones 1/1 tempranas se compran cuando sus dueños las listan.',
  'go.s1t':'Prepara una wallet de Ordinals','go.s1p':'Xverse, Leather o UniSat. Guardan las inscripciones en una dirección Taproot aparte.',
@@ -1409,18 +1544,18 @@ es:{
  'snap.acme':'Ediciones según acme.pics al 3 de noviembre de 2026.','ed.free':'Acuñación gratis','d.acmeEdFree':'Edición abierta {name}: {s} de {m} acuñadas. Acuñar es gratis; solo pagas la comisión de la red. Acuña en acme.pics con UniSat Wallet, usando su dirección SegWit nativa (bc1q…).',
  'gc.k':'Ruta 4 · A mano','gc.title':'Encargos y obra física','gc.lede':'Lu pinta obras en pixel sobre lienzo cuadro por cuadro, hace escultura, pinta en vivo en eventos y trabaja con marcas y museos. Cada pieza física que vende ahora incluye su propio NFT como certificado de autenticidad.',
  'gc.c1':'Perla, pintura en pixel sobre lienzo, 2023','gc.c2':'Donde nacen los goles, escultura para Locos Por El Arte, 2026',
- 'gc.how':'Empieza la conversación','gc.howp':'Escríbele a Lu por Instagram o X con lo que tienes en mente: tamaño, lugar y tiempos. Pronto habrá un correo para encargos.',
+ 'gc.how':'Empieza la conversación','gc.howp':'Cuéntale a Lu lo que tienes en mente: tamaño, lugar y tiempos. Escríbele por correo, o por Instagram o X.',
  'gl.k':'Glosario','gl.title':'Palabras que vas a encontrar.',
  'sf.title':'Compra con cuidado',
  'sf1.t':'Revisa el número','sf1.p':'Circulan copias de las imágenes. Compara el número de la obra, el ID del asset o de la inscripción con este sitio antes de pagar.',
  'sf2.t':'Tu frase es solo tuya','sf2.p':'Ningún artista, mercado ni soporte te pedirá nunca tu frase de recuperación.',
  'sf3.t':'Una unidad a la vez','sf3.p':'Los dispensadores pueden vaciarse entre bloques. Compra una unidad por pago y paga el precio exacto.',
  'sf4.t':'Ojo con la comisión','sf4.p':'Las comisiones de la red suben y bajan con la demanda. Revísala antes de confirmar.',
- 'ft.eyebrow':'Lu Ambriz · Ciudad de México','ft.title':'Colecciona, encarga, colabora.','ft.collect':'Cómo coleccionar','ft.msg':'Escribir por Instagram ↗','ft.snap':'Leído de Bitcoin en el bloque 973,099 · 25 de octubre de 2026',
+ 'ft.eyebrow':'Lu Ambriz · Ciudad de México','ft.title':'Colecciona, encarga, colabora.','ft.collect':'Cómo coleccionar','ft.msg':'Escríbele a Lu','ft.snap':'Leído de Bitcoin en el bloque 973,099 · 25 de octubre de 2026',
  'work.other':'También en Ethereum y Base ↓','lbl.utxo':'Arte UTXO · #{n}',
  'fe.eyebrow':'{n} eventos · 2024–2026','fe.title':'Expos y eventos','fe.lede':'De Beeple Studios en Carolina del Sur a museos en Puebla y la Ciudad de México y una exposición en Bali, su obra ha llenado muros LED, pantallas de museo, festivales y espacios públicos.',
  'fe.g1':'Beeple Studios · Charleston, EUA','fe.g1s':'Beeple (Mike Winkelmann) es el artista digital estadounidense detrás de Everydays, la serie de arte diario que empezó en 2007; en 2021 su NFT Everydays: The First 5000 Days se vendió en Christie’s por 69 millones de dólares.','fe.g2':'México','fe.g2s':'Museos, festivales, escenarios y la ciudad.','fe.g3':'Y más allá','fe.g3s':'Bali y la comunidad de arte en Bitcoin.',
- 'fe.alsoK':'También en','fe.alsoGo':'La lista completa en su historia','fe.video':'Video',
+ 'fe.alsoK':'También en','fe.alsoGo':'La lista completa','fe.video':'Video',
  'soc.follow':'Sigue a Lu',
  'pp.eyebrow':'Obra física','pp.title':'Piezas físicas','pp.lede':'El pixel, a mano. Lu vuelve a pintar sus obras on-chain sobre lienzo, cuadro por cuadro, para que la misma obra viva en la blockchain y en la pared. También pinta esculturas y objetos.','pp.sub':'Pintura en pixel sobre lienzo','pp.subS':'Pixel sobre lienzo',
  'pp.newk':'Nuevo · Física + NFT','pp.newt':'A partir de ahora, cada pieza física que vende incluye su propio NFT.','pp.newp':'Un certificado de autenticidad y un coleccionable digital en uno. El NFT acompaña al lienzo y une su obra física con la cadena.','pp.cta1':'Ver toda la obra física','pp.cta2':'Encargar una pieza',
@@ -1474,6 +1609,7 @@ const short = h => h.slice(0,6) + '…' + h.slice(-4);
 
 /* ---------------- data ---------------- */
 const SNAP = DATA.snap;
+const TIP = () => LIVE.tip || SNAP.block;
 const ALL = [...DATA.stamps, ...DATA.ords, ...DATA.acme, ...DATA.cps];
 const BY = Object.fromEntries(ALL.map(x => [x.k, x]));
 const OTHER = [
@@ -1524,22 +1660,25 @@ const VIEWS = ['home','work','story','physical','onchain','collect'];
 let curView = null, lastView = 'home';
 function route(){
   const h = decodeURIComponent((location.hash || '').slice(1));
+  if (h === 'contact' || h.startsWith('contact-')) { closeDrawer(true); LB.close(); if (!curView) showView('home'); Contact.open(h.slice(8)); return; }
+  Contact.close(true);
   if (h.startsWith('w-') && BY[h.slice(2)]) {
     if (!curView) showView('work');
     openDrawer(h.slice(2));
     return;
   }
   closeDrawer(true);
-  const JUMP = {other: ['work', 'xchainSec'], oa: ['onchain', 'oaSec'], proof: ['onchain', 'proofSec'], events: ['home', 'evSec'], pieces: ['home', 'phySec']};
-  const g = h.startsWith('g-') ? 'collect' : JUMP[h] ? JUMP[h][0] : h;
-  showView(VIEWS.includes(g) ? g : 'home');
-  const tgt = h.startsWith('g-') ? h : JUMP[h] ? JUMP[h][1] : '';
-  if (tgt) { const el = document.getElementById(tgt); if (el) setTimeout(() => el.scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block:'start'}), 30); }
+  const JUMP = {other: ['work', 'xchainSec'], oa: ['onchain', 'oaSec'], proof: ['onchain', 'proofSec'], events: ['story', 'evSec'], cv: ['story', 'shSec'], pieces: ['home', 'phySec']};
+  const g = h.startsWith('g-') ? 'collect' : h.startsWith('ev-') ? 'story' : JUMP[h] ? JUMP[h][0] : h;
+  const prev = curView; showView(VIEWS.includes(g) ? g : 'home');
+  const tgt = h.startsWith('g-') || h.startsWith('ev-') ? h : JUMP[h] ? JUMP[h][1] : '';
+  if (tgt) { const el = document.getElementById(tgt); if (el) setTimeout(() => el.scrollIntoView({behavior: REDUCE || prev !== curView ? 'auto' : 'smooth', block:'start'}), 30); }
 }
 function showView(v){
   if (curView === v) return;
   curView = v; lastView = v;
   $$('.view').forEach(el => { el.hidden = el.dataset.view !== v; });
+  document.body.classList.add('ready');
   $$('#tabs a').forEach(a => { if (a.dataset.tab === v) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   window.scrollTo(0, 0);
   hooks.forEach(fn => fn(v));
@@ -1554,9 +1693,15 @@ function applyLang(){
   $$('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
   $$('[data-i18n-attr]').forEach(el => { el.dataset.i18nAttr.split(';').forEach(p => { const [a,k] = p.split(':'); el.setAttribute(a, t(k)); }); });
   $('#langBtn').textContent = t('lang.btn'); $('#langBtn').setAttribute('aria-label', t('lang.aria'));
-  $('#blockChipTxt').textContent = t('block') + ' ' + fmt(SNAP.block);
+  chipUpdate(); applyMotion(); $('#ftMail').textContent = MAIL; $('#ftMail').href = 'mailto:' + MAIL;
   renders.forEach(fn => fn());
 }
+function chipUpdate(){ const c = $('#blockChip'), live = LIVE.tip > 0, n = fmt(TIP()), tip = t(live ? 'chip.live' : 'chip.snap');
+  c.classList.toggle('is-snap', !live); $('#blockChipTxt').textContent = t('block') + ' ' + n; c.title = tip; c.setAttribute('aria-label', t('block') + ' ' + n + '. ' + tip); }
+/* pause / play: one setting for every moving part (marquee, 3D hero, selected-works carousel, on-chain nodes) */
+function applyMotion(){ document.documentElement.classList.toggle('still', STILL); $$('[data-motion]').forEach(b => { const k = t(STILL ? 'mo.play' : 'mo.pause'); b.setAttribute('aria-label', k); b.title = k; }); }
+function setMotion(off){ STILL = off; try { localStorage.setItem('lu-motion', off ? 'off' : 'on'); } catch(e) {} applyMotion(); motionHooks.forEach(fn => fn()); }
+document.addEventListener('click', e => { if (e.target.closest('[data-motion]')) setMotion(!STILL); });
 const renders = [];
 $('#langBtn').addEventListener('click', () => { LANG = LANG === 'en' ? 'es' : 'en'; try { localStorage.setItem('lu-lang', LANG); } catch(e) {} applyLang(); });
 
@@ -1580,7 +1725,7 @@ const Hero = (function(){
     tried = true;
     eng = window.LuVox.create(cv, {stage, onCycleEnd: () => go((heroI + 1) % HERO.length, false), onWork: () => hero.classList.add('vox-on')});
     if (!eng) return;
-    if (REDUCE) eng.still(true);
+    if (STILL) eng.still(true);
     eng.set(HERO[heroI]).then(() => eng.preload(HERO));
     if (on) eng.start();
   }
@@ -1589,12 +1734,19 @@ const Hero = (function(){
     if (eng) { if (user) eng.pick(HERO[i]); else eng.set(HERO[i]); }
   }
   addEventListener('luvox', init);
+  /* Three.js (and the 3D engine) load only when Home's hero is on screen, after the page settles; never on Save-Data or 2G */
+  const NET = navigator.connection || {}, LITE = !!(NET.saveData || /(^|-)2g$/.test(NET.effectiveType || ''));
+  let asked = false;
+  function want(){ if (window.LuVox) { init(); return; } if (asked || LITE || !window.LuVoxLoad) return; asked = true;
+    const go = () => window.LuVoxLoad(); if ('requestIdleCallback' in window) requestIdleCallback(go, {timeout: 2500}); else setTimeout(go, 1200); }
+  addEventListener('luvox-ready', () => { if (on) want(); });
+  motionHooks.push(() => { if (!eng) return; eng.still(STILL); if (!STILL && on) eng.start(); });
   addEventListener('pointermove', e => { if (eng && on) eng.pointer(e.clientX / innerWidth - .5, e.clientY / innerHeight - .5); }, {passive: true});
   if ('ResizeObserver' in window) new ResizeObserver(() => { if (eng) eng.layout(); }).observe($('.hero-in'));
-  return {go, start(){ on = true; init(); if (eng) eng.start(); }, stop(){ on = false; if (eng) eng.stop(); }, layout(){ if (eng) eng.layout(); }};
+  return {go, start(){ on = true; want(); if (eng) eng.start(); }, stop(){ on = false; if (eng) eng.stop(); }, layout(){ if (eng) eng.layout(); }};
 })();
 function heroUpdate(){
-  const h = HERO[heroI], x = BY[h.k], ord = x.t === 'ordinal', conf = SNAP.block - x.block + 1;
+  const h = HERO[heroI], x = BY[h.k], ord = x.t === 'ordinal', conf = TIP() - x.block + 1;
   $('#heroCap').innerHTML = ord
     ? t('hero.capO', {n: fmt(x.num), ser: esc(serName(x.ser)), date: fmtDate(x.date), w: x.w, h: x.h, b: fmt(x.bytes)})
     : t('hero.cap', {n: fmt(x.n), ser: esc(serName(x.ser.split(' · ')[0])), date: fmtDate(x.date), w: x.w, h: x.h, b: fmt(x.bytes), o: fmt(x.outs)});
@@ -1619,17 +1771,19 @@ function heroUpdate(){
   renders.push(() => Hero.layout());
 })();
 
-/* marquee: keep the pixel fill moving one full tile per loop */
+/* marquee: scroll and pixel fill both run by script, so the pause button (and reduce-motion) control them */
 (function(){
-  const els = $$('.gtxt'); let anims = [];
+  const els = $$('.gtxt'), tracks = $$('.marquee .track'); let anims = [];
   function go(){
     anims.forEach(a => a.cancel()); anims = [];
-    if (REDUCE || !els[0].animate) return;
+    if (STILL || !els[0].animate) return;
     const h = els[0].getBoundingClientRect().height || 180, tile = 3024 * h / 252;
     els.forEach(el => anims.push(el.animate([{backgroundPosition: '0 0'}, {backgroundPosition: tile + 'px 0'}], {duration: 16000, iterations: Infinity})));
+    tracks.forEach(tr => anims.push(tr.animate([{transform: 'translateX(0)'}, {transform: 'translateX(-50%)'}], {duration: 34000, iterations: Infinity})));
   }
-  hooks.push(v => { if (v === 'home') requestAnimationFrame(go); });
+  hooks.push(v => { if (v === 'home') requestAnimationFrame(go); else { anims.forEach(a => a.cancel()); anims = []; } });
   addEventListener('resize', () => { if (curView === 'home') go(); });
+  motionHooks.push(() => { if (STILL) anims.forEach(a => a.pause()); else if (anims.length) anims.forEach(a => a.play()); else if (curView === 'home') go(); });
 })();
 
 /* ---------------- Pixel Loom ---------------- */
@@ -1643,9 +1797,11 @@ const Loom = (function(){
       if (x.pix) { pw = c.w; ph = c.h; if (pw > 72) { ph = Math.max(1, Math.round(ph * 72 / pw)); pw = 72; } }
       const oc = document.createElement('canvas'); oc.width = pw; oc.height = ph; const ox = oc.getContext('2d'); ox.imageSmoothingEnabled = !x.pix; ox.drawImage(c.img, 0, 0, pw, ph);
       c.pix = oc; c.pw = pw; c.ph = ph; c.ok = true; if (!started) { started = true; stat.style.opacity = '0'; } };
-    c.img.src = x.img; return c; });
-  stat.innerHTML = keys.slice(0, 3).map(k => '<img src="' + BY[k].img + '" alt="' + esc(title(BY[k])) + '"' + (BY[k].pix ? ' class="pix"' : '') + '>').join('');
-  let started = false, W = 0, H = 0, pos = 0, target = 0, last = 0, lastAdv = 0, hover = false, on = false, raf = 0, center = -1, geo = null;
+    return c; });
+  stat.innerHTML = keys.slice(0, 3).map(k => '<img' + isrc(BY[k].img, 360) + ' loading="lazy" alt="' + esc(title(BY[k])) + '"' + (BY[k].pix ? ' class="pix"' : '') + '>').join('');
+  let loaded = false;
+  const load = () => { if (loaded) return; loaded = true; cards.forEach(c => { c.img.src = tsrc(c.x.img, 720); }); };
+  let started = false, W = 0, H = 0, pos = 0, target = 0, last = 0, lastAdv = 0, hover = false, on = false, raf = 0, center = 0, geo = null;
   const n = cards.length;
   function layout(){ const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1); W = r.width; H = r.height; cv.width = Math.max(1, Math.round(W * dpr)); cv.height = Math.max(1, Math.round(H * dpr)); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
   function drawCard(c, x, y, cw, ch, d){
@@ -1682,7 +1838,7 @@ const Loom = (function(){
   function tick(now){
     if (!on) return; raf = requestAnimationFrame(tick); now = now || performance.now();
     const dt = last ? Math.min(64, now - last) : 16; last = now;
-    if (!REDUCE && !hover && now - lastAdv > 3400) { target += 1; lastAdv = now; }
+    if (!STILL && !hover && now - lastAdv > 3400) { target += 1; lastAdv = now; }
     pos += (target - pos) * (1 - Math.exp(-dt / (hover ? 520 : 260)));
     if (Math.abs(target - pos) < .0005) pos = target;
     frameDraw();
@@ -1703,7 +1859,7 @@ const Loom = (function(){
     if (x >= cx && x <= cx + geo.cw) location.hash = 'w-' + cards[center].k; else step(x < cx ? -1 : 1);
   });
   addEventListener('resize', () => { if (on) layout(); });
-  return {start(){ if (on) return; on = true; layout(); last = 0; lastAdv = performance.now(); tick(); }, stop(){ on = false; cancelAnimationFrame(raf); }, caption, relayout(){ layout(); frameDraw(); }};
+  return {start(){ if (on) return; on = true; load(); layout(); last = 0; lastAdv = performance.now(); tick(); }, stop(){ on = false; cancelAnimationFrame(raf); }, caption, relayout(){ layout(); frameDraw(); }};
 })();
 renders.push(() => Loom.caption());
 
@@ -1725,9 +1881,9 @@ renders.push(() => Loom.caption());
 const LB = (function(){
   const el = document.createElement('div');
   el.className = 'lb'; el.hidden = true; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true');
-  el.innerHTML = '<div class="lb-top"><span class="mono num" id="lbN"></span><button type="button" class="round" id="lbClose">✕</button></div><div class="lb-stage" id="lbStage"></div><div class="lb-bar"><button type="button" class="round" id="lbPrev">←</button><p class="lb-cap" id="lbCap" aria-live="polite"></p><button type="button" class="round" id="lbNext">→</button></div>';
+  el.innerHTML = '<div class="lb-top"><span class="mono num" id="lbN"></span><button type="button" class="round" id="lbClose">✕</button></div><div class="lb-stage" id="lbStage"></div><div class="lb-bar"><button type="button" class="round" id="lbPrev">←</button><p class="lb-cap" id="lbCap" aria-live="polite"></p><button type="button" class="round" id="lbNext">→</button></div><div class="lb-ask" id="lbAskRow" hidden><button type="button" class="btn sm primary" id="lbAsk"></button></div>';
   document.body.appendChild(el);
-  const stage = $('#lbStage', el), bP = $('#lbPrev', el), bN = $('#lbNext', el), bC = $('#lbClose', el);
+  const stage = $('#lbStage', el), bP = $('#lbPrev', el), bN = $('#lbNext', el), bC = $('#lbClose', el), askRow = $('#lbAskRow', el), ask = $('#lbAsk', el);
   let items = [], i = 0, back = null;
   function show(){
     const m = items[i];
@@ -1735,6 +1891,7 @@ const LB = (function(){
     $('#lbCap', el).textContent = m.cap;
     $('#lbN', el).textContent = items.length > 1 ? (i + 1) + ' / ' + items.length : '';
     bP.hidden = bN.hidden = items.length < 2;
+    askRow.hidden = !m.ask; ask.textContent = t('lb.ask');
   }
   function open(list, k){
     items = list; i = Math.max(0, Math.min(list.length - 1, k || 0)); back = document.activeElement;
@@ -1750,13 +1907,14 @@ const LB = (function(){
   }
   function step(d){ i = (i + d + items.length) % items.length; show(); }
   bC.addEventListener('click', close); bP.addEventListener('click', () => step(-1)); bN.addEventListener('click', () => step(1));
+  ask.addEventListener('click', () => { const m = items[i]; close(); Contact.ask(m.askName || m.cap); });
   stage.addEventListener('click', e => { if (e.target === stage) close(); });
   document.addEventListener('keydown', e => {
     if (el.hidden) return;
     if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); close(); }
     else if (e.key === 'ArrowRight' && items.length > 1) { e.stopImmediatePropagation(); step(1); }
     else if (e.key === 'ArrowLeft' && items.length > 1) { e.stopImmediatePropagation(); step(-1); }
-    else if (e.key === 'Tab') { const f = [bC, bP, bN, ...$$('video', stage)].filter(b => !b.hidden && b.offsetParent !== null); if (!f.length) return; const a = f[0], z = f[f.length - 1];
+    else if (e.key === 'Tab') { const f = [bC, bP, bN, ask, ...$$('video', stage)].filter(b => !b.hidden && b.offsetParent !== null); if (!f.length) return; const a = f[0], z = f[f.length - 1];
       if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
   }, true);
   return {open, close};
@@ -1768,9 +1926,9 @@ const PIECES = [['marilyn', {en: 'Marilyn', es: 'Marilyn'}], ['ghost', {en: 'The
   ['face', {en: 'Painted face', es: 'Rostro pintado'}, {en: 'Painting', es: 'Pintura'}, {en: 'Painting', es: 'Pintura'}],
   ['guitar', {en: 'Hand-painted guitar', es: 'Guitarra pintada a mano'}, {en: 'Painted object', es: 'Objeto pintado'}, {en: 'Hand-painted electric guitar, signed @byluaambriz', es: 'Guitarra eléctrica pintada a mano, firmada @byluaambriz'}]];
 renders.push(() => {
-  $('#orbs').innerHTML = PIECES.map(([k, n, sub], i) => '<li><button type="button" class="orb" data-i="' + i + '" aria-label="' + esc(n[LANG]) + '"><img src="img/phy_' + k + '.jpg" alt="" loading="lazy" width="720" height="720"></button><p class="orb-t">' + esc(n[LANG]) + '</p><p class="orb-s">' + (sub ? esc(sub[LANG]) : t('pp.subS')) + '</p></li>').join('');
+  $('#orbs').innerHTML = PIECES.map(([k, n, sub], i) => '<li><button type="button" class="orb" data-i="' + i + '" aria-label="' + esc(n[LANG]) + '"><img' + isrc('img/phy_' + k + '.jpg', 240) + ' alt="" loading="lazy" width="720" height="720"></button><p class="orb-t">' + esc(n[LANG]) + '</p><p class="orb-s">' + (sub ? esc(sub[LANG]) : t('pp.subS')) + '</p></li>').join('');
 });
-$('#orbs').addEventListener('click', e => { const b = e.target.closest('.orb'); if (!b) return; LB.open(PIECES.map(([k, n, sub, cap]) => ({t: 'img', src: 'img/phyf_' + k + '.jpg', cap: n[LANG] + ' · ' + (cap ? cap[LANG] : t('pp.sub'))})), +b.dataset.i); });
+$('#orbs').addEventListener('click', e => { const b = e.target.closest('.orb'); if (!b) return; LB.open(PIECES.map(([k, n, sub, cap]) => ({t: 'img', src: 'img/phyf_' + k + '.jpg', cap: n[LANG] + ' · ' + (cap ? cap[LANG] : t('pp.sub')), ask: true, askName: n[LANG]})), +b.dataset.i); });
 
 /* ---------------- home: expos & events ---------------- */
 const BS = {en: 'Beeple Studios · Charleston, SC', es: 'Beeple Studios · Charleston, Carolina del Sur'}, CDMX = {en: 'Mexico City', es: 'Ciudad de México'};
@@ -1843,13 +2001,13 @@ function evHTML(e){
   const media = '<div class="ev2-media ' + (e.feat ? 'f' : 's') + shown.length + '">' + shown.map((m, i) => evTile(e, m, i, i === shown.length - 1 ? extra : 0)).join('') + '</div>';
   const links = e.links.map(([u, l]) => { const txt = esc(typeof l === 'string' ? l : l[LANG]); return u.charAt(0) === '#' ? '<a href="' + u + '">' + txt + ' →</a>' : '<a href="' + u + '" target="_blank" rel="noopener">' + txt + ' ↗</a>'; }).join('');
   const when = e.when ? e.when[LANG] : fmtWhen(e.date);
-  return '<article class="ev2' + (e.feat ? ' feat' : '') + '" data-ev="' + e.k + '">' + media + '<div class="ev2-body"><p class="ev-k">' + esc(e.kick[LANG]) + '</p><h4>' + esc(e.name) + '</h4><p class="ev-meta">' + esc(e.where[LANG]) + (when ? ' · ' + when : '') + '</p><p class="ev-p">' + esc(e.p[LANG]) + '</p><p class="ev-go">' + links + '</p></div></article>';
+  return '<article class="ev2' + (e.feat ? ' feat' : '') + '" id="ev-' + e.k + '" data-ev="' + e.k + '">' + media + '<div class="ev2-body"><p class="ev-k">' + esc(e.kick[LANG]) + '</p><h4>' + esc(e.name) + '</h4><p class="ev-meta">' + esc(e.where[LANG]) + (when ? ' · ' + when : '') + '</p><p class="ev-p">' + esc(e.p[LANG]) + '</p><p class="ev-go">' + links + '</p></div></article>';
 }
 function renderFeatured(){
   $('#feEyebrow').textContent = t('fe.eyebrow', {n: EVENTS.length});
   $('#featured').innerHTML = [[1, 'fe.g1', 'fe.g1s'], [2, 'fe.g2', 'fe.g2s'], [3, 'fe.g3', 'fe.g3s']].map(([g, h, sub]) => {
     let body = EVENTS.filter(e => e.g === g).map(evHTML).join('');
-    if (g === 3) body += '<article class="ev wide also"><div class="ev-body"><p class="ev-k">' + t('fe.alsoK') + '</p><ul class="also-list">' + ALSO.map(([n, d, u]) => '<li>' + (u ? '<a href="' + u + '" target="_blank" rel="noopener"><b>' + esc(n) + ' ↗</b></a>' : '<b>' + esc(n) + '</b>') + '<span>' + esc(d[LANG]) + '</span></li>').join('') + '</ul><p class="ev-go"><a href="#story">' + t('fe.alsoGo') + ' →</a></p></div></article>';
+    if (g === 3) body += '<article class="ev wide also"><div class="ev-body"><p class="ev-k">' + t('fe.alsoK') + '</p><ul class="also-list">' + ALSO.map(([n, d, u]) => '<li>' + (u ? '<a href="' + u + '" target="_blank" rel="noopener"><b>' + esc(n) + ' ↗</b></a>' : '<b>' + esc(n) + '</b>') + '<span>' + esc(d[LANG]) + '</span></li>').join('') + '</ul><p class="ev-go"><a href="#cv">' + t('fe.alsoGo') + ' →</a></p></div></article>';
     const wiki = g === 1 ? ' <a href="https://en.wikipedia.org/wiki/Mike_Winkelmann" target="_blank" rel="noopener">Wikipedia ↗</a>' : '';
     return '<div class="feat-group"><div class="fg-head"><h3>' + t(h) + '</h3><p>' + esc(t(sub)) + wiki + '</p></div><div class="ev2s">' + body + '</div></div>';
   }).join('');
@@ -1857,6 +2015,17 @@ function renderFeatured(){
 }
 $('#featured').addEventListener('click', e => { const b = e.target.closest('.evm'); if (!b) return; const a = b.closest('[data-ev]'); const ev = a && EVENTS.find(x => x.k === a.dataset.ev); if (ev) LB.open(evItems(ev), +b.dataset.i); });
 renders.push(renderFeatured);
+const HOME_EV = ['pepefest', 'flores', 'barroco'];   /* the three highlights on Home; every event is in Story (#events) */
+function renderEvHome(){
+  $('#feEyebrowH').textContent = t('fe.eyebrow', {n: EVENTS.length});
+  $('#featHome').innerHTML = HOME_EV.map(k => EVENTS.find(e => e.k === k)).filter(Boolean).map(e => {
+    let i = e.media.findIndex(m => m[0] === 'img' && !m[3]); if (i < 0) i = 0;
+    const when = e.when ? e.when[LANG] : fmtWhen(e.date);
+    return '<article data-ev="' + e.k + '">' + evTile(e, e.media[i], i, 0) + '<div class="ev2-body"><p class="ev-k">' + esc(e.kick[LANG]) + '</p><h3 class="ev3-t">' + esc(e.name) + '</h3><p class="ev-meta">' + esc(e.where[LANG]) + (when ? ' · ' + when : '') + '</p><p class="ev-p">' + esc(e.p[LANG]) + '</p><p class="ev-go"><a href="#ev-' + e.k + '">' + t('fe.more') + ' →</a></p></div></article>';
+  }).join('');
+}
+$('#featHome').addEventListener('click', e => { const b = e.target.closest('.evm'); if (!b) return; const a = b.closest('[data-ev]'); const ev = a && EVENTS.find(x => x.k === a.dataset.ev); if (ev) LB.open(evItems(ev), +b.dataset.i); });
+renders.push(renderEvHome);
 
 /* ---------------- on-chain: what on-chain means (moved from Home in v10) ---------------- */
 function tierSVG(n){
@@ -1920,7 +2089,7 @@ const Nodes = (function(){
       if (thumb) ctx.drawImage(thumb, p.x - h, p.y - h, sz, sz); });
   }
   function tick(now){ if (!on) return; raf = requestAnimationFrame(tick); if (now > nextAt) { fire(now); nextAt = now + 4200; } draw(now); }
-  function start(){ if (on) return; if (!build()) return; if (REDUCE) { draw(performance.now()); return; } on = true; nextAt = 0; raf = requestAnimationFrame(tick); }
+  function start(){ if (on) return; if (!build()) return; if (STILL) { draw(performance.now()); return; } on = true; nextAt = 0; raf = requestAnimationFrame(tick); }
   function stop(){ on = false; cancelAnimationFrame(raf); }
   addEventListener('resize', () => { if (on) build(); else if (W && build()) draw(performance.now()); });
   return {start, stop};
@@ -1931,6 +2100,7 @@ const Nodes = (function(){
   if ('IntersectionObserver' in window) new IntersectionObserver(es => { es.forEach(e => vis = e.isIntersecting); sync(); }).observe($('#nodes')); else vis = true;
   document.addEventListener('visibilitychange', sync);
   hooks.push(() => requestAnimationFrame(sync));
+  motionHooks.push(() => { Nodes.stop(); sync(); });
 })();
 
 /* ---------------- work: other blockchains ---------------- */
@@ -1945,10 +2115,10 @@ function xCard(x){
   const top = x.rar ? '<span class="cnum">#' + x.no + '</span><span class="badge r-' + x.rar.toLowerCase() + '">' + x.rar.toUpperCase() + '</span>'
     : '<span class="cnum">' + esc(x.num ? '#' + x.num : x.g === 5 ? x.std : x.chain) + '</span><span class="badge chain">' + (x.chain === 'Base' ? 'BASE' : 'ETH') + '</span>';
   const meta = x.rar ? 'Base · ' + d : d + (x.eds ? ' · ' + t(x.g === 5 ? 'card.eds' : 'card.units', {n: fmt(x.eds)}) : '');
-  return '<a class="card" href="#w-' + x.k + '"><div class="media' + (x.white ? ' white' : '') + (x.g === 2 || x.g === 5 ? ' tall' : '') + '"><img src="' + x.img + '" alt="" loading="lazy"></div><div class="cbody"><div class="ctop">' + top + '</div><p class="ctitle">' + esc(title(x)) + '</p><p class="cmeta">' + esc(meta) + '</p></div></a>';
+  return '<a class="card" href="#w-' + x.k + '"><div class="media' + (x.white ? ' white' : '') + (x.g === 2 || x.g === 5 ? ' tall' : '') + '"><img' + isrc(x.img, 360) + ' alt="" loading="lazy"></div><div class="cbody"><div class="ctop">' + top + '</div><p class="ctitle">' + esc(title(x)) + '</p><p class="cmeta">' + esc(meta) + '</p></div></a>';
 }
 function xFeat(x){
-  return '<article class="xf"><a class="xf-media" href="#w-' + x.k + '" aria-label="' + esc(title(x)) + '"><img src="' + x.img + '" alt="" loading="lazy"></a><div class="xf-body"><p class="ev-k">' + esc(x.chain + ' · ' + x.std) + '</p><h4>' + esc(title(x)) + '</h4><p class="ev-meta">' + esc(x.ser) + '</p><p class="ev-p">' + esc(LANG === 'es' ? x.note_es : x.note_en) + '</p><p class="ev-go"><a href="' + x.url + '" target="_blank" rel="noopener">' + t('x.osBtn') + '</a><a href="#w-' + x.k + '">' + t('x.details') + ' →</a></p></div></article>';
+  return '<article class="xf"><a class="xf-media" href="#w-' + x.k + '" aria-label="' + esc(title(x)) + '"><img' + isrc(x.img, 360) + ' alt="" loading="lazy"></a><div class="xf-body"><p class="ev-k">' + esc(x.chain + ' · ' + x.std) + '</p><h4>' + esc(title(x)) + '</h4><p class="ev-meta">' + esc(x.ser) + '</p><p class="ev-p">' + esc(LANG === 'es' ? x.note_es : x.note_en) + '</p><p class="ev-go"><a href="' + x.url + '" target="_blank" rel="noopener">' + t('x.osBtn') + '</a><a href="#w-' + x.k + '">' + t('x.details') + ' →</a></p></div></article>';
 }
 function renderX(){
   const grp = (g, a, b, inner, links) => '<div class="xgroup"><div class="fg-head"><h3>' + t(a) + '</h3><p>' + t(b) + (links || []).map(([u, k]) => ' · <a href="' + u + '" target="_blank" rel="noopener">' + t(k) + '</a>').join('') + '</p></div>' + inner + '</div>';
@@ -1962,7 +2132,7 @@ renders.push(renderX);
 
 /* ---------------- home: layers + offers ---------------- */
 function layersHTML(full){
-  const pick = ks => ks.map(k => BY[k]).filter(Boolean).map(x => '<img src="' + x.img + '" alt="' + esc(title(x)) + '" loading="lazy"' + (x.pix ? ' class="pix"' : '') + '>').join('');
+  const pick = ks => ks.map(k => BY[k]).filter(Boolean).map(x => '<img' + isrc(x.img, 48) + ' alt="' + esc(title(x)) + '" loading="lazy"' + (x.pix ? ' class="pix"' : '') + '>').join('');
   const L = [
     ['utxo', 'ly.utxo', 'ly.utxo.n', 'ly.utxo.who', 'ly.utxo.p', ['s17585','s55421','s74818','s288216','s60497','s336083','s414225','s859215']],
     ['witness', 'ly.wit', 'ly.wit.n', 'ly.wit.who', 'ly.wit.p', ['o-perla','o-comic','o-prince','o-moonlizard','o-xolotl','a-frida','a-queen']],
@@ -1970,11 +2140,11 @@ function layersHTML(full){
   return L.map(l => '<div class="layer ' + l[0] + '"><div class="lt"><h3 class="h3">' + t(l[1]) + '</h3><span class="who">' + t(l[3]) + '</span></div><p class="big">' + t(l[2]) + '</p><p class="body" style="font-size:15px">' + t(l[4]) + '</p><div class="thumbs">' + pick(full ? l[5] : l[5].slice(0, 6)) + '</div></div>').join('');
 }
 function offersHTML(){
-  const ed = k => { const x = BY[k], e = x.ed; return '<a class="offer" href="#w-' + k + '"><img src="' + x.img + '" alt="" loading="lazy"><div><b>' + e.name + '</b><p class="p">' + (e.price ? sats(e.price) : t('ed.free')) + '</p><p class="s">' + (k === 'a-kahlo' ? t('of.kahlo') + ' · ' : '') + t('of.left', {n: e.max - e.supply, m: e.max}) + '</p><div class="bar-prog"><i style="width:' + (100 * e.supply / e.max).toFixed(1) + '%"></i></div></div></a>'; };
-  const disp = DATA.stamps.filter(s => s.disp), cheapest = disp.reduce((m, s) => minDisp(s)[0] < minDisp(m)[0] ? s : m);
+  const ed = k => { const x = BY[k], e = x.ed; return '<a class="offer" href="#w-' + k + '"><img' + isrc(x.img, 80) + ' alt="" loading="lazy"><div><b>' + e.name + '</b><p class="p">' + (e.price ? sats(e.price) : t('ed.free')) + '</p><p class="s">' + (k === 'a-kahlo' ? t('of.kahlo') + ' · ' : '') + t('of.left', {n: e.max - e.supply, m: e.max}) + '</p><div class="bar-prog"><i style="width:' + (100 * e.supply / e.max).toFixed(1) + '%"></i></div></div></a>'; };
+  const disp = DATA.stamps.filter(s => s.disp), cheapest = disp.length ? disp.reduce((m, s) => minDisp(s)[0] < minDisp(m)[0] ? s : m) : null;
   return ed('a-ppboots') + ed('a-vaquero') + ed('a-kahlo') + ed('a-toro') +
-    '<a class="offer" href="#g-stamps"><img' + (cheapest.pix ? ' class="pix"' : '') + ' src="' + cheapest.img + '" alt="" loading="lazy"><div><b>' + t('of.stamps') + '</b><p class="p">' + t('of.from', {p: sats(minDisp(cheapest)[0])}) + '</p><p class="s">' + t('of.disp', {n: disp.length}) + '</p></div></a>' +
-    '<a class="offer" href="#g-ordinals"><img src="img/evo_frida.jpg" alt="" loading="lazy"><div><b>' + t('of.evo') + '</b><p class="p">' + sats(88000) + '</p><p class="s">' + t('of.gamma') + ' · Gamma</p></div></a>';
+    (cheapest ? '<a class="offer" href="#g-stamps"><img' + (cheapest.pix ? ' class="pix"' : '') + isrc(cheapest.img, 80) + ' alt="" loading="lazy"><div><b>' + t('of.stamps') + '</b><p class="p">' + t('of.from', {p: sats(minDisp(cheapest)[0])}) + '</p><p class="s">' + t('of.disp', {n: disp.length}) + '</p></div></a>' : '') +
+    '<a class="offer" href="#g-ordinals"><img' + isrc('img/evo_frida.jpg', 80) + ' alt="" loading="lazy"><div><b>' + t('of.evo') + '</b><p class="p">' + sats(88000) + '</p><p class="s">' + t('of.gamma') + ' · Gamma</p></div></a>';
 }
 renders.push(() => { $('#layersHome').innerHTML = layersHTML(false); $('#layersFull').innerHTML = layersHTML(true); $('#offersHome').innerHTML = offersHTML(); });
 
@@ -1985,7 +2155,7 @@ const seriesOf = x => x.ser.split(' · ');
 const SER_ES = {'Loose works':'Obras sueltas','Early ordinals':'Ordinals tempranos','Ordinals 2024':'Ordinals 2024','Digital painting':'Pintura digital','Digital collage':'Collage digital','Pixel art':'Pixel art','Counterparty':'Counterparty','UTXO art on Ordinals':'Arte UTXO en Ordinals'};
 function serName(s){ return LANG === 'es' && SER_ES[s] ? SER_ES[s] : s; }
 function cardHTML(x){
-  const media = x.img ? '<div class="media"><img src="' + x.img + '" alt="" loading="lazy"' + (x.pix ? ' class="pix"' : '') + ' width="' + x.w + '" height="' + x.h + '"></div>'
+  const media = x.img ? '<div class="media"><img' + isrc(x.img, 360) + ' alt="" loading="lazy"' + (x.pix ? ' class="pix"' : '') + ' width="' + x.w + '" height="' + x.h + '"></div>'
     : '<div class="media"><div class="pend"><span>' + esc(x.asset) + '</span><span>' + t('card.pending') + '</span></div></div>';
   let meta = '';
   if (x.t === 'stamp') meta = x.w + '×' + x.h + ' · ' + kb(x.bytes) + ' · ' + t('card.outs', {o: fmt(x.outs)});
@@ -2011,7 +2181,7 @@ function renderCatalog(){
   L.sort(by); listKeys = L.map(x => x.k);
   $('#countLine').textContent = L.length === 1 ? t('count1') : t('count', {n: L.length});
   $('#grid').innerHTML = L.map(cardHTML).join('');
-  $('#moreGrid').innerHTML = OTHER.map(o => '<a href="#w-' + o.k + '"><img src="' + o.img + '" alt="" loading="lazy"' + (o.small ? ' style="object-fit:contain;background:var(--panel);padding:20px"' : '') + '><span>' + esc(title(o)) + '</span></a>').join('');
+  $('#moreGrid').innerHTML = OTHER.map(o => '<a href="#w-' + o.k + '"><img' + isrc(o.img, 360) + ' alt="" loading="lazy"' + (o.small ? ' style="object-fit:contain;background:var(--panel);padding:20px"' : '') + '><span>' + esc(title(o)) + '</span></a>').join('');
 }
 $('#typeSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; fType = b.dataset.v; renderCatalog(); });
 $('#serSel').addEventListener('change', e => { fSer = e.target.value; renderCatalog(); });
@@ -2086,8 +2256,8 @@ function drawerHTML(x){
   let c = '<div class="box buy"><h4>' + t('d.collect') + '</h4>';
   if (x.t === 'stamp' || x.t === 'cp') {
     const a = x.asset;
-    if (x.disp) { c += '<p>' + t('d.disp') + '</p><table class="ptable num">' + x.disp.slice().sort((p, q) => p[0] - q[0]).map(d => '<tr><td>' + sats(d[0]) + ' <span class="muted">· ' + btc(d[0]) + '</span></td><td>' + t('d.units', {n: d[1]}) + '</td></tr>').join('') + '</table>'; }
-    else c += '<p>' + t('d.nodisp') + '</p>';
+    if (x.disp) { c += '<p>' + t(LIVE.disp ? 'd.dispLive' : 'd.disp') + '</p><table class="ptable num">' + x.disp.slice().sort((p, q) => p[0] - q[0]).map(d => '<tr><td>' + sats(d[0]) + ' <span class="muted">· ' + btc(d[0]) + '</span></td><td>' + t('d.units', {n: d[1]}) + '</td></tr>').join('') + '</table>'; }
+    else c += '<p>' + t(LIVE.disp ? 'd.nodispLive' : 'd.nodisp') + '</p>';
     c += '<div class="row"><a class="btn sm green" href="https://xcp.io/asset/' + a + '" target="_blank" rel="noopener">' + t('d.buyX') + '</a>' + (x.t === 'stamp' ? '<a class="btn sm" href="https://stampchain.io/stamp/' + x.n + '" target="_blank" rel="noopener">' + t('d.buyS') + '</a>' : '<a class="btn sm" href="https://horizon.market/assets/' + a + '" target="_blank" rel="noopener">' + t('d.buyH') + '</a>') + '</div>';
   } else if (x.t === 'ordinal') {
     if (x.gamma) c += '<p>' + t('d.evo') + '</p><div class="row"><a class="btn sm green" href="https://gamma.io/ordinals/collections/' + x.gamma + '" target="_blank" rel="noopener">' + t('d.evoBtn') + '</a></div>';
@@ -2119,6 +2289,7 @@ function openDrawer(k){
   requestAnimationFrame(() => { scrim.classList.add('on'); drawer.classList.add('on'); });
   document.body.style.overflow = 'hidden';
   setTimeout(() => $('#dClose').focus({preventScroll: true}), 60);
+  if (x.asset) liveDisp();
 }
 function closeDrawer(silent){
   if (!dKey) return; dKey = null;
@@ -2142,6 +2313,60 @@ document.addEventListener('keydown', e => {
 });
 renders.push(() => { if (dKey) { $('#dKind').textContent = t('k.' + BY[dKey].t); $('#dBody').innerHTML = drawerHTML(BY[dKey]); } });
 
+/* ---------------- contact: write to Lu. The visitor's own email app sends the message; this page sends and keeps nothing. ---------------- */
+let askPiece = '';
+const Contact = (function(){
+  const el = $('#cpanel'), send = $('#cpSend'), name = $('#cpName'), msg = $('#cpMsg'), note = $('#cpNote'), subj = $('#cpSubj'), ok = $('#cpOk');
+  const TOPICS = ['commission', 'piece', 'collab', 'press', 'other'];
+  let isOpen = false, back = null, topic = '', piece = '', okT = 0;
+  const subject = () => topic === 'piece' ? t('cp.s.piece', {p: piece || t('cp.s.aPiece')}) : t('cp.s.' + (topic || 'other'));
+  const body = () => { const m = msg.value.trim(), n = name.value.trim(); return t('cp.hi') + '\n\n' + (m ? m + '\n\n' : '\n\n') + (n ? n + '\n\n' : '') + '— ' + t('cp.sig'); };
+  function sync(){
+    $$('input[name="cpTopic"]', el).forEach(r => { r.checked = r.value === topic; });
+    msg.placeholder = t('cp.ph.' + (topic || 'other'));
+    note.textContent = t('cp.noteP'); note.hidden = topic !== 'piece';
+    subj.textContent = t('cp.subj', {s: subject()});
+    send.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject()) + '&body=' + encodeURIComponent(body());
+  }
+  function render(){
+    $('#cpTopics').innerHTML = TOPICS.map(k => '<label class="cp-chip"><input type="radio" name="cpTopic" value="' + k + '"><span>' + esc(t('cp.t.' + k)) + '</span></label>').join('');
+    $('#cpAddr').textContent = MAIL; $('#cpAddr').href = 'mailto:' + MAIL; sync();
+  }
+  function flash(){ ok.textContent = t('cp.copied'); clearTimeout(okT); okT = setTimeout(() => { ok.textContent = ''; }, 2600); }
+  function fallback(text){ const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; el.appendChild(ta); ta.select(); try { if (document.execCommand('copy')) flash(); } catch(e) {} ta.remove(); }
+  function copy(text){ if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(flash, () => fallback(text)); else fallback(text); }
+  el.addEventListener('change', e => { if (e.target.name === 'cpTopic') { topic = e.target.value; if (topic !== 'piece') piece = ''; sync(); } });
+  el.addEventListener('input', sync);
+  $('#cpForm').addEventListener('submit', e => e.preventDefault());
+  $('#cpCopy').addEventListener('click', () => copy(MAIL + '\n' + t('cp.subj', {s: subject()}) + '\n\n' + body()));
+  $('#cpCopyAddr').addEventListener('click', () => copy(MAIL));
+  $('#cpClose').addEventListener('click', () => close());
+  scrim.addEventListener('click', () => close());
+  function open(k){
+    topic = TOPICS.includes(k) ? k : ''; piece = topic === 'piece' ? askPiece : ''; askPiece = ''; sync();
+    if (!isOpen) { back = document.activeElement; isOpen = true; scrim.hidden = false; el.hidden = false;
+      requestAnimationFrame(() => { scrim.classList.add('on'); el.classList.add('on'); }); document.body.style.overflow = 'hidden'; }
+    setTimeout(() => { const f = matchMedia('(pointer: coarse)').matches ? $('#cpClose') : topic ? msg : $('input[name="cpTopic"]', el); if (f) f.focus({preventScroll: true}); }, 90);
+  }
+  function close(silent){
+    if (!isOpen) return; isOpen = false;
+    el.classList.remove('on'); if (!dKey) { scrim.classList.remove('on'); document.body.style.overflow = ''; }
+    setTimeout(() => { if (!isOpen) { el.hidden = true; if (!dKey) scrim.hidden = true; } }, 380);
+    if (!silent && location.hash.startsWith('#contact')) history.replaceState(null, '', '#' + (lastView || 'home'));
+    if (back && back.focus) back.focus({preventScroll: true});
+  }
+  document.addEventListener('keydown', e => {
+    if (!isOpen) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key !== 'Tab') return;
+    const f = $$('a[href],button:not([disabled]),input:not([type="radio"]),textarea,input[type="radio"]:checked', el).filter(x => x.offsetParent !== null); if (!f.length) return;
+    const a = f[0], z = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+  });
+  return {open, close, render, ask(p){ askPiece = p || ''; location.hash = 'contact-piece'; }};
+})();
+renders.push(() => Contact.render());
+
 /* ---------------- story ---------------- */
 const BRANDS = [['UNLOCK', {en: 'art direction', es: 'dirección de arte'}], ['La Cana', {en: 'ceramics workshops', es: 'talleres de cerámica'}], ['Consejo de la Comunicación', {en: 'creative workshops for children', es: 'talleres creativos infantiles'}], ['Scotiabank', {en: 'creative workshops for children', es: 'talleres creativos infantiles'}], ['Bitso'], ['Trubit'], ['Gamma'], ['Xverse'], ['Vara Network'], ['Las Flores Web3'], ['Ledger Leaders'], ['Nohbek Woman', {en: 'cybersecurity and digital art', es: 'ciberseguridad y arte digital'}]];
 renders.push(() => {
@@ -2161,8 +2386,8 @@ renders.push(() => {
     [957511, '2026-07-11', 'a-kahlo', {en: 'ACME', es: 'ACME'}, {en: 'KAHLO, DREAMS, FRIDA and QUEEN', es: 'KAHLO, DREAMS, FRIDA y QUEEN'}],
     [971796, '2026-10-17', 'a-toro', {en: 'TORO', es: 'TORO'}, {en: 'Animal strength in raw strokes', es: 'Fuerza animal en trazos crudos'}],
     [973281, '2026-10-26', 'a-ppboots', {en: 'Four in one week', es: 'Cuatro en una semana'}, {en: 'NOPPAL, VAQUERO, DESIERTO and PPBOOTS, her newest works', es: 'NOPPAL, VAQUERO, DESIERTO y PPBOOTS, sus obras más recientes'}]];
-  $('#timeline').innerHTML = TL.map(([b, d, k, h, p]) => { const x = BY[k]; return '<li><p class="blk num">' + fmt(b) + '</p><a class="cube" href="#w-' + k + '" aria-label="' + esc(title(x)) + '"><img src="' + x.img + '" alt=""' + (x.pix ? ' class="pix"' : ' class="cov"') + ' loading="lazy"></a><h4>' + h[LANG] + '</h4><p>' + fmtDate(d) + ' · ' + p[LANG] + '</p></li>'; }).join('') +
-    '<li><p class="blk num" style="color:var(--utxo)">' + fmt(SNAP.block) + '</p><div class="cube now"><span>' + (LANG === 'es' ? 'cada nodo<br>cada bloque' : 'every node<br>every block') + '</span></div><h4>' + (LANG === 'es' ? 'Hoy' : 'Today') + '</h4><p>' + (LANG === 'es' ? 'Sigue ahí, en cada nodo completo' : 'Still there, on every full node') + '</p></li>';
+  $('#timeline').innerHTML = TL.map(([b, d, k, h, p]) => { const x = BY[k]; return '<li><p class="blk num">' + fmt(b) + '</p><a class="cube" href="#w-' + k + '" aria-label="' + esc(title(x)) + '"><img' + isrc(x.img, 96) + ' alt=""' + (x.pix ? ' class="pix"' : ' class="cov"') + ' loading="lazy"></a><h4>' + h[LANG] + '</h4><p>' + fmtDate(d) + ' · ' + p[LANG] + '</p></li>'; }).join('') +
+    '<li><p class="blk num" id="tlNow" style="color:var(--utxo)">' + fmt(TIP()) + '</p><div class="cube now"><span>' + (LANG === 'es' ? 'cada nodo<br>cada bloque' : 'every node<br>every block') + '</span></div><h4>' + (LANG === 'es' ? 'Hoy' : 'Today') + '</h4><p>' + (LANG === 'es' ? 'Sigue ahí, en cada nodo completo' : 'Still there, on every full node') + '</p></li>';
   const SH = [
     ['Museo Soumaya', CDMX, {en: 'Festival de las Flores · Las Flores Web3 · April 2025', es: 'Festival de las Flores · Las Flores Web3 · abril 2025'}],
     ['Beeple Studios', {en: 'Charleston, USA', es: 'Charleston, EUA'}, {en: 'PepeFest 2024 · CryptoPunks Meetup 2.0, 2025 · Obey and Resist, 2026', es: 'PepeFest 2024 · CryptoPunks Meetup 2.0, 2025 · Obey and Resist, 2026'}],
@@ -2177,7 +2402,8 @@ renders.push(() => {
     ['10x10 LATAM Art Collective', {en: 'Gamma × Xverse', es: 'Gamma × Xverse'}, {en: 'PEPE COMIC BOOK · July 2024', es: 'PEPE COMIC BOOK · julio 2024'}],
     ['Cripto Bazar CDMX', CDMX, {en: 'February 2024', es: 'febrero 2024'}],
     ['BandaWeb3 #063', {en: 'Podcast', es: 'Podcast'}, {en: 'Interview · June 2025', es: 'Entrevista · junio 2025'}]];
-  $('#shown').innerHTML = SH.map(([n, w, d]) => '<li><span class="n">' + esc(n) + '</span><span class="w">' + esc(w[LANG]) + '</span><span class="d">' + esc(d[LANG]) + '</span></li>').join('');
+  const SHK = {'Museo Soumaya': 'flores', 'Beeple Studios': 'pepefest', 'Barco Utopía': 'utopia', 'Museo Internacional del Barroco': 'barroco', 'Pepe in Bali': 'bali', 'Ledger Leaders Week 2026': 'ledger', 'Locos Por El Arte': 'locos', '10x10 LATAM Art Collective': 'comic'};
+  $('#shown').innerHTML = SH.map(([n, w, d]) => '<li><span class="n">' + (SHK[n] ? '<a href="#ev-' + SHK[n] + '">' + esc(n) + '</a>' : esc(n)) + '</span><span class="w">' + esc(w[LANG]) + '</span><span class="d">' + esc(d[LANG]) + '</span></li>').join('');
   $('#impact').innerHTML = [['ed1', 'var(--rosa)'], ['ed2', 'var(--utxo)'], ['ed3', 'var(--wit)']].map(([k, c]) => '<li style="--c:' + c + '"><p class="k">' + t(k + '.k') + '</p><h3>' + t(k + '.t') + '</h3><p>' + t(k + '.p') + '</p></li>').join('');
   $('#brands').innerHTML = BRANDS.map(([n, d]) => '<li>' + esc(n) + (d ? '<small>' + esc(d[LANG]) + '</small>' : '') + '</li>').join('');
 });
@@ -2201,15 +2427,16 @@ renders.push(() => {
       ['img', 'merch_tote_scream.jpg', E ? 'Tote, riff de El grito' : 'Tote bag, The Scream riff'], ['img', 'merch_case_frida.jpg', E ? 'Funda de teléfono, FridaPepe' : 'Phone case, FridaPepe'], ['img', 'merch_notebook_perla.jpg', E ? 'Libreta, Perla' : 'Notebook, Perla']]],
     [E ? 'En pantallas y escenarios' : 'On screens and stages', E ? 'Pantallas de museo, charlas y pintura en sitio.' : 'Museum screens, talks and painting on site.', [
       ['img', 'ev_barroco.jpg', 'Museo Internacional del Barroco, Puebla'], ['img', 'lu_painting.jpg', E ? 'Pintando en UNLOCK, Museo Internacional del Barroco' : 'Painting at UNLOCK, Museo Internacional del Barroco'], ['img', 'talk_stage.jpg', E ? 'Ledger Leaders Week 2026, México' : 'Ledger Leaders Week 2026, Mexico'], ['img', 'pg_soumaya_night.jpg', E ? 'El Museo Soumaya de noche' : 'Museo Soumaya at night']]]];
-  $('#gallery').innerHTML = GAL.map(([h, p, items], gi) => '<div class="gal-group"><header><h2 class="h3">' + esc(h) + '</h2><p>' + esc(p) + '</p></header><div class="masonry">' + items.map(([k, f, cap], ii) => '<figure><button type="button" class="zoom" data-g="' + gi + '" data-i="' + ii + '" aria-label="' + esc(cap) + '">' + (k === 'img' ? '<img src="img/' + f + '" alt="" loading="lazy">' : '<video data-src="vid/' + f + '.mp4" poster="vid/' + f + '.jpg" muted loop playsinline preload="none"></video>') + '</button><figcaption>' + esc(cap) + '</figcaption></figure>').join('') + '</div></div>').join('');
+  $('#gallery').innerHTML = GAL.map(([h, p, items], gi) => '<div class="gal-group"><header><h2 class="h3">' + esc(h) + '</h2><p>' + esc(p) + '</p></header><div class="masonry">' + items.map(([k, f, cap], ii) => '<figure><button type="button" class="zoom" data-g="' + gi + '" data-i="' + ii + '" aria-label="' + esc(cap) + '">' + (k === 'img' ? '<img' + isrc('img/' + f, 440) + ' alt="" loading="lazy">' : '<video data-src="vid/' + f + '.mp4" poster="vid/' + f + '.jpg" muted loop playsinline preload="none"></video>') + '</button><figcaption>' + esc(cap) + '</figcaption></figure>').join('') + '</div></div>').join('');
   wireVideos();
 });
-$('#gallery').addEventListener('click', e => { const b = e.target.closest('.zoom'); if (!b) return; const g = GAL[+b.dataset.g]; if (!g) return; LB.open(g[2].map(([k, f, cap]) => k === 'img' ? {t: 'img', src: 'img/' + f, cap} : {t: 'vid', src: 'vid/' + f + '.mp4', poster: 'vid/' + f + '.jpg', cap}), +b.dataset.i); });
-let vio = null;
+$('#gallery').addEventListener('click', e => { const b = e.target.closest('.zoom'); if (!b) return; const g = GAL[+b.dataset.g]; if (!g) return; const ask = [0, 1, 3].includes(+b.dataset.g); LB.open(g[2].map(([k, f, cap]) => k === 'img' ? {t: 'img', src: 'img/' + f, cap, ask} : {t: 'vid', src: 'vid/' + f + '.mp4', poster: 'vid/' + f + '.jpg', cap}), +b.dataset.i); });
+/* in-page videos never autoplay: with a mouse they play while hovered (unless motion is paused); a tap or click opens the viewer */
+const HOVER = matchMedia('(hover: hover) and (pointer: fine)');
 function wireVideos(){
-  if (!('IntersectionObserver' in window)) return;
-  if (!vio) vio = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { if (!v.src && v.dataset.src) v.src = v.dataset.src; if (!REDUCE) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } } else v.pause(); }), {rootMargin: '120px'});
-  $$('video[data-src]').forEach(v => vio.observe(v));
+  $$('video[data-src]').forEach(v => { if (v.dataset.wired) return; v.dataset.wired = '1'; const host = v.closest('.evm,figure') || v;
+    host.addEventListener('mouseenter', () => { if (STILL || !HOVER.matches) return; if (!v.src) v.src = v.dataset.src; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+    host.addEventListener('mouseleave', () => v.pause()); });
 }
 
 /* ---------------- on-chain: proof ---------------- */
@@ -2300,24 +2527,55 @@ function renderAvail(){
   rows.sort(availSort === 'price' ? (a, b) => a.p - b.p : availSort === 'num' ? (a, b) => (a.s.n || 1e9) - (b.s.n || 1e9) : (a, b) => b.left - a.left);
   const th = (k, s) => '<th scope="col">' + (s ? '<button type="button" data-sort="' + s + '">' + t(k) + (availSort === s ? ' ↓' : '') + '</button>' : t(k)) + '</th>';
   $('#availTable').innerHTML = '<thead><tr>' + th('th.work', 'num') + th('th.price', 'price') + th('th.left', 'left') + th('th.disp') + '<th scope="col" style="text-align:right">' + t('th.links') + '</th></tr></thead><tbody>' +
-    rows.slice(0, availAll ? rows.length : 12).map(r => { const s = r.s, a = s.asset; return '<tr><td><div class="w">' + (s.img ? '<img class="' + (s.pix ? 'pix' : '') + '" src="' + s.img + '" alt="" loading="lazy">' : '<span style="width:40px"></span>') + '<a href="#w-' + s.k + '"><b>' + esc(label(s)) + '</b><br><span class="muted" style="font-size:12.5px">' + esc(title(s)) + '</span></a></div></td><td class="p">' + sats(r.p) + '<small>' + btc(r.p) + '</small></td><td>' + r.left + '</td><td>' + r.n + '</td><td class="acts"><a href="https://xcp.io/asset/' + a + '" target="_blank" rel="noopener">xcp.io ↗</a>' + (s.t === 'stamp' ? '<a href="https://stampchain.io/stamp/' + s.n + '" target="_blank" rel="noopener">stampchain ↗</a>' : '') + '<a href="https://horizon.market/assets/' + a + '" target="_blank" rel="noopener">Horizon ↗</a></td></tr>'; }).join('') + '</tbody>';
+    rows.slice(0, availAll ? rows.length : 12).map(r => { const s = r.s, a = s.asset; return '<tr><td><div class="w">' + (s.img ? '<img class="' + (s.pix ? 'pix' : '') + '"' + isrc(s.img, 48) + ' alt="" loading="lazy">' : '<span style="width:40px"></span>') + '<a href="#w-' + s.k + '"><b>' + esc(label(s)) + '</b><br><span class="muted" style="font-size:12.5px">' + esc(title(s)) + '</span></a></div></td><td class="p">' + sats(r.p) + '<small>' + btc(r.p) + '</small></td><td>' + r.left + '</td><td>' + r.n + '</td><td class="acts"><a href="https://xcp.io/asset/' + a + '" target="_blank" rel="noopener">xcp.io ↗</a>' + (s.t === 'stamp' ? '<a href="https://stampchain.io/stamp/' + s.n + '" target="_blank" rel="noopener">stampchain ↗</a>' : '') + '<a href="https://horizon.market/assets/' + a + '" target="_blank" rel="noopener">Horizon ↗</a></td></tr>'; }).join('') + '</tbody>';
   const more = $('#availMore'); more.hidden = rows.length <= 12; more.textContent = availAll ? t('av.less') : t('av.more', {n: rows.length});
   const none = DATA.stamps.filter(s => !s.disp).map(s => '#' + fmt(s.n));
   $('#noneLine').textContent = t('gs.none', {list: none.join(', ')});
 }
 $('#availMore').addEventListener('click', () => { availAll = !availAll; renderAvail(); if (!availAll) $('#availTitle').scrollIntoView({block: 'start'}); });
 $('#availTable').addEventListener('click', e => { const b = e.target.closest('button[data-sort]'); if (b) { availSort = b.dataset.sort; renderAvail(); } });
-$('#liveBtn').addEventListener('click', async () => {
-  const msg = $('#liveMsg'); msg.textContent = t('snap.wait');
-  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 6000);
-  try {
-    const targets = DATA.stamps.map(s => s.asset), out = {};
-    const res = await Promise.all(targets.map(a => fetch('https://api.counterparty.io:4000/v2/assets/' + a + '/dispensers?status=open&verbose=true', {signal: ctl.signal}).then(r => { if (!r.ok) throw new Error('http'); return r.json(); })));
-    res.forEach((j, i) => { out[targets[i]] = (j.result || []).filter(d => d.give_remaining > 0 && d.give_quantity > 0).map(d => [d.satoshirate, Math.floor(d.give_remaining / d.give_quantity)]); });
-    DATA.stamps.forEach(s => { const l = out[s.asset]; if (l && l.length) s.disp = l; else delete s.disp; });
-    clearTimeout(timer); msg.textContent = t('snap.ok'); renderAvail(); renderCatalog();
-  } catch(e) { clearTimeout(timer); msg.textContent = t('snap.fail'); }
-});
+/* live dispensers from the Counterparty API: checked once per visit when Collect, a work with dispensers or Home's offers
+   come into view (cached 10 minutes); the snapshot stays if fewer than 80% of the assets answer */
+const DISP_TARGETS = () => [...DATA.stamps, ...['c-bobokevin', 'c-baliqueen'].map(k => BY[k]).filter(Boolean)].filter(x => x.asset);
+let dispBusy = false;
+async function liveDisp(manual){
+  if (dispBusy || (LIVE.disp && !manual)) return;
+  const msg = $('#liveMsg');
+  if (!manual) { try { const c = JSON.parse(sessionStorage.getItem('lu-disp') || 'null'); if (c && Date.now() - c.at < 600000) { applyDisp(c.out, c.at); return; } } catch(e) {} }
+  dispBusy = true; msg.textContent = t('snap.wait');
+  const list = DISP_TARGETS(), ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 15000);
+  const res = await Promise.allSettled(list.map(x => fetch('https://api.counterparty.io:4000/v2/assets/' + x.asset + '/dispensers?status=open&verbose=true', {signal: ctl.signal}).then(r => { if (!r.ok) throw new Error('http'); return r.json(); })));
+  clearTimeout(timer); dispBusy = false;
+  const out = {}; let okN = 0;
+  res.forEach((r, i) => { if (r.status !== 'fulfilled') return; okN++; out[list[i].asset] = (r.value.result || []).filter(d => d.give_remaining > 0 && d.give_quantity > 0).map(d => [d.satoshirate, Math.floor(d.give_remaining / d.give_quantity)]); });
+  if (okN < list.length * .8) { msg.textContent = t('snap.fail'); return; }
+  const at = Date.now(); try { sessionStorage.setItem('lu-disp', JSON.stringify({at, out})); } catch(e) {}
+  applyDisp(out, at);
+}
+function applyDisp(out, at){
+  DISP_TARGETS().forEach(x => { if (!(x.asset in out)) return; if (out[x.asset].length) x.disp = out[x.asset]; else delete x.disp; });
+  LIVE.disp = at; snapTexts(); renderAvail(); renderCatalog(); $('#offersHome').innerHTML = offersHTML();
+  if (dKey) { const b = $('#dBody'), st = b.scrollTop; b.innerHTML = drawerHTML(BY[dKey]); b.scrollTop = st; }
+}
+function snapTexts(){
+  $('#snapNote').textContent = t(LIVE.disp ? 'snap.noteLive' : 'snap.note'); $('#snapDisp').textContent = t(LIVE.disp ? 'snap.dispLive' : 'snap.disp');
+  if (LIVE.disp) $('#liveMsg').textContent = t('snap.okAt', {t: new Intl.DateTimeFormat(loc(), {hour: 'numeric', minute: '2-digit'}).format(new Date(LIVE.disp))});
+}
+$('#liveBtn').addEventListener('click', () => liveDisp(true));
+hooks.push(v => { if (v === 'collect') liveDisp(); });
+if ('IntersectionObserver' in window) new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { o.disconnect(); liveDisp(); } }, {rootMargin: '200px'}).observe($('#offersHome'));
+renders.push(snapTexts);
+
+/* live block height from mempool.space for the header chip, confirmations and Story's "today"; the snapshot stays if it can't load */
+let tipAt = 0;
+async function getTip(){
+  if (document.hidden || Date.now() - tipAt < 60000) return; tipAt = Date.now();
+  try { const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 8000);
+    const r = await fetch('https://mempool.space/api/blocks/tip/height', {signal: ctl.signal, cache: 'no-store'}); clearTimeout(tm);
+    if (!r.ok) return; const n = parseInt((await r.text()).trim(), 10);
+    if (n >= SNAP.block && n < SNAP.block + 1e6 && n !== LIVE.tip) { LIVE.tip = n; chipUpdate(); heroUpdate(); const tn = $('#tlNow'); if (tn) tn.textContent = fmt(n); }
+  } catch(e) {}
+}
 renders.push(() => {
   $('#routes').innerHTML = [['utxo', 'rt1', 'g-stamps'], ['witness', 'rt2', 'g-ordinals'], ['arweave', 'rt3', 'g-acme'], ['hand', 'rt4', 'g-commission']].map(([c, k, a]) => '<a class="route ' + c + '" href="#' + a + '"><span class="k">' + t(k + '.k') + '</span><h3>' + t(k + '.t') + '</h3><p>' + t(k + '.p') + '</p><span class="go">' + t(k + '.go') + '</span></a>').join('');
   $('#need').innerHTML = ['nd1', 'nd2', 'nd3'].map(k => '<li><b>' + t(k + '.t') + '</b><p>' + t(k + '.p') + '</p></li>').join('');
@@ -2326,21 +2584,25 @@ renders.push(() => {
   $('#gaSteps').innerHTML = ['s1', 's2', 's3'].map(k => '<li><div><b>' + t('ga.' + k + 't') + '</b><p>' + t('ga.' + k + 'p') + '</p></div></li>').join('');
   $('#gsWallets').innerHTML = walletHTML(WALLETS_CP); $('#gsWhere').innerHTML = walletHTML(WHERE_CP); $('#goWallets').innerHTML = walletHTML(WALLETS_ORD);
   $('#gsCols').innerHTML = COLS.map(([c, n]) => lnk('https://stamped.ninja/collection/' + c, esc(n) + ' ↗')).join('');
-  $('#gammaGrid').innerHTML = DATA.ords.filter(o => o.gamma).map(o => '<a href="https://gamma.io/ordinals/collections/' + o.gamma + '" target="_blank" rel="noopener"><img src="' + o.img + '" alt="" loading="lazy"><span>' + esc(title(o)) + ' ↗<small>' + sats(88000) + '</small></span></a>').join('');
-  $('#comicBox').innerHTML = '<a class="offer" href="https://gamma.io/ordinals/collections/pepe-comic-book" target="_blank" rel="noopener"><img src="img/comic.jpg" alt="" loading="lazy"><div><b>' + t('go.comicT') + ' ↗</b><p class="p">' + t('go.comicP') + '</p><p class="s">' + t('go.comicS') + '</p></div></a><a class="offer" href="#w-o-comic"><img src="img/comic.jpg" alt="" loading="lazy" style="filter:saturate(.2)"><div><b>#72,220,172</b><p class="p">' + kb(227630) + ' · PNG</p><p class="s">' + (LANG === 'es' ? 'Ver la inscripción original' : 'See the original inscription') + '</p></div></a>';
-  $('#edGrid').innerHTML = ['a-ppboots', 'a-desierto', 'a-vaquero', 'a-noppal', 'a-toro', 'a-invisible', 'a-dolor', 'a-kahlo', 'a-frida'].map(k => { const x = BY[k], e = x.ed; return '<div class="ed"><a href="#w-' + k + '"><img src="' + x.img + '" alt="' + esc(x.te) + '" loading="lazy"></a><div class="in"><b>' + e.name + '</b><p class="pr">' + (e.price ? sats(e.price) + ' · ' + btc(e.price) : t('ed.free')) + '</p><p class="mt">' + t('ed.minted', {s: e.supply, m: e.max}) + ' · ' + t('ed.left', {n: e.max - e.supply}) + '</p><div class="bar-prog"><i style="width:' + (100 * e.supply / e.max).toFixed(1) + '%"></i></div>' + (k === 'a-kahlo' ? '<p class="note">' + esc(LANG === 'es' ? x.note_es : x.note_en) + '</p>' : '') + '<a class="btn sm green" href="https://acme.pics/asset/' + e.name + '" target="_blank" rel="noopener">' + t('ed.mint') + '</a></div></div>'; }).join('');
+  $('#gammaGrid').innerHTML = DATA.ords.filter(o => o.gamma).map(o => '<a href="https://gamma.io/ordinals/collections/' + o.gamma + '" target="_blank" rel="noopener"><img' + isrc(o.img, 260) + ' alt="" loading="lazy"><span>' + esc(title(o)) + ' ↗<small>' + sats(88000) + '</small></span></a>').join('');
+  $('#comicBox').innerHTML = '<a class="offer" href="https://gamma.io/ordinals/collections/pepe-comic-book" target="_blank" rel="noopener"><img' + isrc('img/comic.jpg', 80) + ' alt="" loading="lazy"><div><b>' + t('go.comicT') + ' ↗</b><p class="p">' + t('go.comicP') + '</p><p class="s">' + t('go.comicS') + '</p></div></a><a class="offer" href="#w-o-comic"><img' + isrc('img/comic.jpg', 80) + ' alt="" loading="lazy" style="filter:saturate(.2)"><div><b>#72,220,172</b><p class="p">' + kb(227630) + ' · PNG</p><p class="s">' + (LANG === 'es' ? 'Ver la inscripción original' : 'See the original inscription') + '</p></div></a>';
+  $('#edGrid').innerHTML = ['a-ppboots', 'a-desierto', 'a-vaquero', 'a-noppal', 'a-toro', 'a-invisible', 'a-dolor', 'a-kahlo', 'a-frida'].map(k => { const x = BY[k], e = x.ed; return '<div class="ed"><a href="#w-' + k + '"><img' + isrc(x.img, 260) + ' alt="' + esc(x.te) + '" loading="lazy"></a><div class="in"><b>' + e.name + '</b><p class="pr">' + (e.price ? sats(e.price) + ' · ' + btc(e.price) : t('ed.free')) + '</p><p class="mt">' + t('ed.minted', {s: e.supply, m: e.max}) + ' · ' + t('ed.left', {n: e.max - e.supply}) + '</p><div class="bar-prog"><i style="width:' + (100 * e.supply / e.max).toFixed(1) + '%"></i></div>' + (k === 'a-kahlo' ? '<p class="note">' + esc(LANG === 'es' ? x.note_es : x.note_en) + '</p>' : '') + '<a class="btn sm green" href="https://acme.pics/asset/' + e.name + '" target="_blank" rel="noopener">' + t('ed.mint') + '</a></div></div>'; }).join('');
   $('#gloss').innerHTML = GLOSS[LANG].map(([a, b]) => '<div><dt>' + esc(a) + '</dt><dd>' + esc(b) + '</dd></div>').join('');
   $('#safety').innerHTML = ['sf1', 'sf2', 'sf3', 'sf4'].map(k => '<li><b>' + t(k + '.t') + '</b><p>' + t(k + '.p') + '</p></li>').join('');
   renderAvail();
 });
 
 /* ---------------- boot ---------------- */
+$$('img[data-w]').forEach(i => { const s = i.getAttribute('src'), w = +i.dataset.w; if (!THUMBS[s]) return; i.srcset = tsrc(s, w) + ' 1x, ' + tsrc(s, 2 * w) + ' 2x, ' + tsrc(s, 3 * w) + ' 3x'; i.src = tsrc(s, w); });
 applyLang();
 route();
+setTimeout(getTip, 1500); setInterval(getTip, 150000); document.addEventListener('visibilitychange', getTip);
 })();
 </script>
 <script type="module">
-import * as THREE from './js/three.module.min.js';
+/* Three.js and the 3D hero load on demand (Hero.start calls LuVoxLoad when Home's hero is on screen) */
+let luvoxP = null;
+window.LuVoxLoad = () => luvoxP || (luvoxP = import('./js/three.module.min.js').then(THREE => {
 
 /* Hero V2: each work lands as voxels on a floating slab, one batch per output (or witness push),
    reads flat from above, then lifts off to a ring of node tiles. All motion is a pure function of
@@ -2752,6 +3014,8 @@ function create(canvas, opts = {}){
 
 window.LuVox = {create};
 window.dispatchEvent(new Event('luvox'));
+}).catch(() => {}));
+window.dispatchEvent(new Event('luvox-ready'));
 </script>
 <script>
 /* Inside the luambriz.ar.io frame: report the open #section so the frame's address bar can deep-link. */
