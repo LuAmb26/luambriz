@@ -1235,7 +1235,7 @@ const MAIL = ['luambriz', 'proton.me'].join('@');
 let STILL = REDUCE;   /* motion paused: starts paused with reduce-motion, then follows the pause/play button (remembered) */
 try { const m = localStorage.getItem('lu-motion'); if (m === 'off' || m === 'on') STILL = m === 'off'; } catch(e) {}
 const motionHooks = [];
-const LIVE = {tip: 0, disp: 0};
+const LIVE = {tip: 0, disp: 0, src: ''};
 const CSSV = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -1245,7 +1245,7 @@ en:{
  'nav.home':'Home','nav.work':'Work','nav.story':'Story','nav.physical':'Physical','nav.onchain':'On-chain','nav.collect':'Collect',
  'nav.contact':'Write to Lu','mo.pause':'Pause motion','mo.play':'Play motion',
  'hero.one':'Lu Ambriz writes her work into Bitcoin itself.','hero.story':'Her story →','fe.all':'See all exhibitions and events','fe.more':'Read more',
- 'chip.live':'Latest Bitcoin block, live from mempool.space','chip.snap':'Bitcoin block when the catalog was read (October 25, 2026)',
+ 'chip.live':'Latest Bitcoin block, live from {src}','chip.snap':'Bitcoin block when the catalog was read (October 25, 2026)',
  'snap.noteLive':'Dispenser prices and counts are live from the Counterparty API. ACME edition counts are from acme.pics on November 3, 2026.','snap.dispLive':'Live from the Counterparty API. Dispensers change as people buy.','snap.okAt':'Live from the Counterparty API, checked at {t}.',
  'd.dispLive':'Open dispensers right now, live from the Counterparty API. Each payment of the exact price buys one unit.','d.nodispLive':'No open dispenser right now. Check xcp.io and stampchain.io for new dispensers, and Horizon for offers.',
  'cp.k':'Contact','cp.title':'Write to Lu','cp.cta':'Write to Lu','cp.lede':'Commissions, questions about a physical piece, collaborations and press.','cp.topicL':'What is it about?',
@@ -1422,7 +1422,7 @@ es:{
  'nav.home':'Inicio','nav.work':'Obra','nav.story':'Historia','nav.physical':'Obra física','nav.onchain':'On-chain','nav.collect':'Coleccionar',
  'nav.contact':'Escríbele a Lu','mo.pause':'Pausar movimiento','mo.play':'Reanudar movimiento',
  'hero.one':'Lu Ambriz escribe su obra dentro de Bitcoin.','hero.story':'Su historia →','fe.all':'Ver todas las exposiciones y eventos','fe.more':'Leer más',
- 'chip.live':'Último bloque de Bitcoin, en vivo desde mempool.space','chip.snap':'Bloque de Bitcoin en que se leyó el catálogo (25 de octubre de 2026)',
+ 'chip.live':'Último bloque de Bitcoin, en vivo desde {src}','chip.snap':'Bloque de Bitcoin en que se leyó el catálogo (25 de octubre de 2026)',
  'snap.noteLive':'Precios y dispensadores en vivo desde la API de Counterparty. Ediciones de ACME según acme.pics al 3 de noviembre de 2026.','snap.dispLive':'En vivo desde la API de Counterparty. Los dispensadores cambian conforme la gente compra.','snap.okAt':'En vivo desde la API de Counterparty, revisado a las {t}.',
  'd.dispLive':'Dispensadores abiertos ahora mismo, en vivo desde la API de Counterparty. Cada pago del precio exacto compra una unidad.','d.nodispLive':'Sin dispensador abierto ahora mismo. Revisa xcp.io y stampchain.io para nuevos dispensadores, y Horizon para ofertas.',
  'cp.k':'Contacto','cp.title':'Escríbele a Lu','cp.cta':'Escríbele a Lu','cp.lede':'Encargos, preguntas sobre una pieza física, colaboraciones y prensa.','cp.topicL':'¿De qué se trata?',
@@ -1696,7 +1696,7 @@ function applyLang(){
   chipUpdate(); applyMotion(); $('#ftMail').textContent = MAIL; $('#ftMail').href = 'mailto:' + MAIL;
   renders.forEach(fn => fn());
 }
-function chipUpdate(){ const c = $('#blockChip'), live = LIVE.tip > 0, n = fmt(TIP()), tip = t(live ? 'chip.live' : 'chip.snap');
+function chipUpdate(){ const c = $('#blockChip'), live = LIVE.tip > 0, n = fmt(TIP()), tip = t(live ? 'chip.live' : 'chip.snap', {src: LIVE.src});
   c.classList.toggle('is-snap', !live); $('#blockChipTxt').textContent = t('block') + ' ' + n; c.title = tip; c.setAttribute('aria-label', t('block') + ' ' + n + '. ' + tip); }
 /* pause / play: one setting for every moving part (marquee, 3D hero, selected-works carousel, on-chain nodes) */
 function applyMotion(){ document.documentElement.classList.toggle('still', STILL); $$('[data-motion]').forEach(b => { const k = t(STILL ? 'mo.play' : 'mo.pause'); b.setAttribute('aria-label', k); b.title = k; }); }
@@ -2566,15 +2566,22 @@ hooks.push(v => { if (v === 'collect') liveDisp(); });
 if ('IntersectionObserver' in window) new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { o.disconnect(); liveDisp(); } }, {rootMargin: '200px'}).observe($('#offersHome'));
 renders.push(snapTexts);
 
-/* live block height from mempool.space for the header chip, confirmations and Story's "today"; the snapshot stays if it can't load */
-let tipAt = 0;
+/* live block height for the header chip, confirmations and Story's "today": mempool.space, with blockstream.info as backup;
+   a failed check is retried after 15 s (up to 4 times), then every 2.5 minutes; the snapshot stays until one answers */
+const TIP_SRC = [['https://mempool.space/api/blocks/tip/height', 'mempool.space'], ['https://blockstream.info/api/blocks/tip/height', 'blockstream.info']];
+let tipAt = 0, tipFails = 0, tipRetry = 0;
+async function tipFrom(u){
+  const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 8000);
+  try { const r = await fetch(u, {signal: ctl.signal, cache: 'no-store'}); if (!r.ok) return 0; const n = parseInt((await r.text()).trim(), 10); return n >= SNAP.block && n < SNAP.block + 1e6 ? n : 0; }
+  catch(e) { return 0; } finally { clearTimeout(tm); }
+}
 async function getTip(){
   if (document.hidden || Date.now() - tipAt < 60000) return; tipAt = Date.now();
-  try { const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 8000);
-    const r = await fetch('https://mempool.space/api/blocks/tip/height', {signal: ctl.signal, cache: 'no-store'}); clearTimeout(tm);
-    if (!r.ok) return; const n = parseInt((await r.text()).trim(), 10);
-    if (n >= SNAP.block && n < SNAP.block + 1e6 && n !== LIVE.tip) { LIVE.tip = n; chipUpdate(); heroUpdate(); const tn = $('#tlNow'); if (tn) tn.textContent = fmt(n); }
-  } catch(e) {}
+  let n = 0, src = '';
+  for (const [u, s] of TIP_SRC) { n = await tipFrom(u); if (n) { src = s; break; } }
+  if (!n) { tipAt = 0; if (tipFails++ < 4) { clearTimeout(tipRetry); tipRetry = setTimeout(getTip, 15000); } return; }
+  tipFails = 0;
+  if (n !== LIVE.tip || src !== LIVE.src) { LIVE.tip = n; LIVE.src = src; chipUpdate(); heroUpdate(); const tn = $('#tlNow'); if (tn) tn.textContent = fmt(n); }
 }
 renders.push(() => {
   $('#routes').innerHTML = [['utxo', 'rt1', 'g-stamps'], ['witness', 'rt2', 'g-ordinals'], ['arweave', 'rt3', 'g-acme'], ['hand', 'rt4', 'g-commission']].map(([c, k, a]) => '<a class="route ' + c + '" href="#' + a + '"><span class="k">' + t(k + '.k') + '</span><h3>' + t(k + '.t') + '</h3><p>' + t(k + '.p') + '</p><span class="go">' + t(k + '.go') + '</span></a>').join('');
